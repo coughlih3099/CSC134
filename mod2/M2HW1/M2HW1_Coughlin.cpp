@@ -192,11 +192,14 @@ void cheering() {
     * - C: must use string concatination to build cheerOne and cheerTwo
     */
     cout << "\nQuestion 4\n";
-    string school = "FTCC";
+    string letsGo = "Let's go ";
+    string school = "FTCC\n";
     string team = "Trojans";
+    string cheerOne = letsGo + school;
+    string cheerTwo = letsGo + team;
 
     for (int i = 0; i < 3; i++) {
-        cout << "Let's go " << school << "\n";
+        cout << cheerOne;
     }
-    cout << "Let's go " << team << endl;
+    cout << cheerTwo << endl;
 }
