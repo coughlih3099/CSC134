@@ -1,6 +1,6 @@
 /*
  *  CSC134
- *  M2HW1 - Silver
+ *  M2HW1 - Gold
  *  Harley Coughlin
  *  08/26/2024
  */
@@ -192,5 +192,12 @@ void pizza_party() {
 }
 
 void cheering() {
-    cout << "TODO: Implement" << endl;
+    /*
+    * cheering program for the FTCC sports team
+    * use string school, team
+    * suggestions:
+    * - A: you can't print raw strings, only variables
+    * - B: have to use string letsGo, school, team, cheerOne, cheerTwo
+    * - C: must use string concatination to build cheerOne and cheerTwo
+    */
 }
