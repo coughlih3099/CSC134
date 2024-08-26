@@ -6,6 +6,8 @@
  */
 
 #include <iostream>
+#include <iomanip>
+#include <random>
 using namespace std;
 
 void banking_sim();
@@ -28,7 +30,7 @@ void banking_sim() {
     string user_name;
 
     cout << "Please enter your name: ";
-    cin >> user_name;
+    getline(cin, user_name);
     cout << "Please enter the starting account balance: ";
     cin >> account_balance;
     cout << "Please enter amount of deposit: ";
@@ -39,11 +41,14 @@ void banking_sim() {
 
     account_total = account_balance + amount_deposit - amount_withdrawal;
 
+    // creating a "random" number
+    // fun that since its seed is the user_name, you'll get the same value
+    // each time the same name is put in, adding "consistency"
+    seed_seq seed1(user_name.begin(), user_name.end());
+    minstd_rand generator(seed1);
     cout << "---------Account Details---------\n";
     cout << "Account name: " << user_name << "\n";
-    // TODO(coughlih3099):
-    // replace with randnumber
-    cout << "Account number: 000001\n";
-    cout << "Account balance: $" << account_total << endl;
+    cout << "Account number: " << generator() << "\n";
+    cout << "Account balance: $" << fixed << setprecision(2) << account_total << endl;
 }
 
