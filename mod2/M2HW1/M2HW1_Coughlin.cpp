@@ -1,11 +1,10 @@
 /*
  *  CSC134
- *  M2HW1 - Bronze
+ *  M2HW1 - Silver
  *  Harley Coughlin
  *  08/26/2024
  */
 
-#include <ios>
 #include <iostream>
 #include <iomanip>
 #include <limits>
@@ -38,11 +37,11 @@ int main() {
                 pizza_party();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
-            case 5:
+            case 4:
                 cheering();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
-            case 6:
+            case 5:
                 // I feel like there could be a better way to do this
                 banking_sim();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -52,6 +51,10 @@ int main() {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cheering();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            case 6:
+                cout << "\nGoodbye!\n" << endl;
+                keep_going = false;
                 break;
             default:
                 cout << "Hey man, that wasn't 1-6\n\n";
@@ -63,7 +66,7 @@ int main() {
 
 
 void print_menu() {
-    cout << "M2HW1: The Menu!\n";
+    cout << "\nM2HW1: The Menu!\n";
     cout << "----------------\n";
     cout << "1. Question 1 (banking sim)\n";
     cout << "2. Question 2 (general crates)\n";
@@ -139,8 +142,55 @@ void general_crates() {
     charge = volume * CHARGE_PER_CUBIC_FOOT;
     profit = charge - cost;
 
+    cout << "-----------------\n";
     cout << "The volume of the crate is " << volume << " cubic feet.\n";
     cout << "Cost to build: $" << cost << "\n";
     cout << "Charge to customer: $" << charge << "\n";
     cout << "Profit: $" << profit << "\n" << endl;
+}
+
+
+void pizza_party() {
+    /*
+    * Question 3: pizza party
+    * we're throwing a pizza party,
+    * each visitor gets 3 slices,
+    * ask the amount of pizzas being ordered,
+    * amount of slices per pizza, and how many visitors.
+    * output how many pieces of pizza are leftover.
+    * no suggestions.
+    */
+    cout << "\nQuestion 3\n";
+    const int SLICES_PER_VISITOR = 3;
+    int amount_of_pizzas, slices_per_pizza, amount_of_visitors, leftover_pizza;
+    cout << "How many pizzas are you ordering? ";
+    cin >> amount_of_pizzas;
+    cout << "How many slices per pizza? ";
+    cin >> slices_per_pizza;
+    cout << "How many visitors are attending? ";
+    cin >> amount_of_visitors;
+
+    int total_slices_ordered = (amount_of_pizzas * slices_per_pizza);
+    int slices_needed = (amount_of_visitors * SLICES_PER_VISITOR);
+    leftover_pizza = total_slices_ordered - slices_needed;
+    int pizzas_still_needed = abs(leftover_pizza) / slices_per_pizza;
+
+    cout << "-----------------\n";
+    if (leftover_pizza < 0) {
+        cout << "You didn't order enough pizza! You're " << abs(leftover_pizza);
+        // aren't ternaries fun?
+        cout << ((leftover_pizza == 1) ? " slices " : " slice ");
+        cout << "short. You need to order at least ";
+        cout << ((pizzas_still_needed < 1) ? 1 : pizzas_still_needed);
+        cout << " more pizza\n" << endl;
+    } else if (leftover_pizza == 0) {
+        cout << "Nice! You ordered the perfect amount of pizza!\n" << endl;
+    } else {
+        cout << "You bought too much pizza! You have ";
+        cout << leftover_pizza << " slices left\n" << endl;
+    }
+}
+
+void cheering() {
+    cout << "TODO: Implement" << endl;
 }
