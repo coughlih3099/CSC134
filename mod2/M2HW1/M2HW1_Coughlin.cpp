@@ -27,30 +27,22 @@ int main() {
         switch (choice) {
             case 1:
                 banking_sim();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case 2:
                 general_crates();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case 3:
                 pizza_party();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case 4:
                 cheering();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case 5:
                 // I feel like there could be a better way to do this
                 banking_sim();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 general_crates();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 pizza_party();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cheering();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case 6:
                 cout << "\nGoodbye!\n" << endl;
@@ -58,7 +50,6 @@ int main() {
                 break;
             default:
                 cout << "Hey man, that wasn't 1-6\n\n";
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
     return 0;
@@ -84,7 +75,7 @@ void banking_sim() {
      *  Write a program that simulates banking transactions
      *  suggestions: allow whitespace in name, print all money w/ 2 decimal places.
      */
-    cout << "\nQuestion 1: \n";
+    cout << "\nQuestion 1\n";
 
     double account_balance, amount_deposit, amount_withdrawal, account_total;
     string user_name;
@@ -110,7 +101,7 @@ void banking_sim() {
     cout << "Account name: " << user_name << "\n";
     cout << "Account number: " << generator() << "\n";
     cout << "Account balance: $" << fixed << setprecision(2) << account_total
-         << "\n" << endl;
+         << endl;
 }
 
 
@@ -121,7 +112,7 @@ void general_crates() {
     * charge per ft^3 = 0.52,
     * suggestions: print all money with 2 decimal places
     */
-    cout << "\nQuestion 2:\n";
+    cout << "\nQuestion 2\n";
     const double COST_PER_CUBIC_FOOT = 0.3;
     const double CHARGE_PER_CUBIC_FOOT = 0.52;
 
@@ -146,7 +137,7 @@ void general_crates() {
     cout << "The volume of the crate is " << volume << " cubic feet.\n";
     cout << "Cost to build: $" << cost << "\n";
     cout << "Charge to customer: $" << charge << "\n";
-    cout << "Profit: $" << profit << "\n" << endl;
+    cout << "Profit: $" << profit << endl;
 }
 
 
@@ -182,12 +173,12 @@ void pizza_party() {
         cout << ((leftover_pizza == 1) ? " slices " : " slice ");
         cout << "short. You need to order at least ";
         cout << ((pizzas_still_needed < 1) ? 1 : pizzas_still_needed);
-        cout << " more pizza\n" << endl;
+        cout << " more pizza" << endl;
     } else if (leftover_pizza == 0) {
-        cout << "Nice! You ordered the perfect amount of pizza!\n" << endl;
+        cout << "Nice! You ordered the perfect amount of pizza!" << endl;
     } else {
         cout << "You bought too much pizza! You have ";
-        cout << leftover_pizza << " slices left\n" << endl;
+        cout << leftover_pizza << " slices left" << endl;
     }
 }
 
@@ -200,4 +191,12 @@ void cheering() {
     * - B: have to use string letsGo, school, team, cheerOne, cheerTwo
     * - C: must use string concatination to build cheerOne and cheerTwo
     */
+    cout << "\nQuestion 4\n";
+    string school = "FTCC";
+    string team = "Trojans";
+
+    for (int i = 0; i < 3; i++) {
+        cout << "Let's go " << school << "\n";
+    }
+    cout << "Let's go " << team << endl;
 }
