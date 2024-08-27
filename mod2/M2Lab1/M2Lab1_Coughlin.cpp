@@ -32,7 +32,7 @@ int main() {
     profit = charge - cost;
 
     cout << "The volume of the crate is " << volume << " cubic feet.\n";
-    cout << "Cost to build: $" << charge << endl;
+    cout << "Cost to build: $" << cost << endl;
     cout << "Charge to customer: $" << charge << endl;
     cout << "Profit: $" << profit << endl;
     return 0;
