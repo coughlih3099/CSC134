@@ -4,6 +4,7 @@
 // 08/26/2024
 
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 int main() {
@@ -12,17 +13,19 @@ int main() {
     double price_per_apple;
     double total_cost;
 
-    cout << "What is your name? \n";
+    cout << "What is your name? ";
     cin >> name;
-    cout << "How many apples in stock? \n";
+    cout << "How many apples in stock? ";
     cin >> num_apples;
-    cout << "How much is one apple? \n";
+    cout << "How much is one apple? ";
     cin >> price_per_apple;
     cout << endl;
 
     cout << "Welcome to the " << name << " orchard!" << endl;
 
     total_cost = num_apples * price_per_apple;
+
+    cout << fixed << setprecision(2);
 
     cout << "You have " << num_apples << " apples" << endl;
     cout << "Each apple costs $" << price_per_apple << endl;
