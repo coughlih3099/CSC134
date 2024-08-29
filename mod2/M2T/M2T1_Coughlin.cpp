@@ -19,10 +19,10 @@ int main() {
     total = tax_amount + meal_price;
 
     // Print the results
-    cout << "The meal price is: $" << meal_price << "\n";
-    cout << "The tax percentage is: " << tax_percent * 100 << "%\n";
-    cout << "The tax amount is: $" << fixed << setprecision(2) << tax_amount << "\n";
-    cout << "The total is: $" << fixed << setprecision(2) << total << endl;
+    cout << "The meal price is: "<< setw(5) << fixed << setprecision(2) << "$" << meal_price << "\n";
+    cout << "The tax percentage is: " << setprecision(0) << tax_percent * 100 << "%\n";
+    cout << "The tax amount is: " << setw(5) << "$" << fixed << setprecision(2) << tax_amount << "\n";
+    cout << "The total is: " << setw(10) << "$" << fixed << setprecision(2) << total << endl;
 
     return 0;
 }
