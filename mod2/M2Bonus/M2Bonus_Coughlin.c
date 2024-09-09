@@ -60,7 +60,7 @@ int main(void)
 
     BALL ball;
     ball.attached = true;
-    ball.can_collide = true;
+    ball.can_collide = false;
     ball.speed = (Vector2) { 0.0f, 0.0f };
     ball.radius = 10.0f;
     ball.color = ORANGE;
