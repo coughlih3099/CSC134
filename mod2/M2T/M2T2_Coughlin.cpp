@@ -1,36 +1,30 @@
 // CSC 134
 // M2T2
 // Harley Coughlin
-// 08/25/2024
-
+// 09/09/2024
 
 #include <iostream>
-
 using namespace std;
 
-
 int main() {
-    // This program will simulate an apple orchard.
-    // The owner's name
     string name;
-    // number of apples owned
-    int apples = 100;
-    // price per apple
-    double pricePerApple = 0.25;
+    int num_apples;
+    double price_per_apple;
+    double total_cost;
 
-    // calculate the total price of the apples
-    double totalPrice = apples * pricePerApple;
+    cout << "What is your name? \n";
+    cin >> name;
+    cout << "How many apples in stock? \n";
+    cin >> num_apples;
+    cout << "How much is one apple? \n";
+    cin >> price_per_apple;
+    cout << endl;
 
-    // print all the info about the orchard
-    cout << "Welcome to " << name;
-    cout << "'s apple orchard." << endl;
-    cout << "We have " << apples;
-    cout << " apples in stock" << endl;
-    cout << "Apples are currently $";
-    cout << pricePerApple << " each." << endl;
+    cout << "Welcome to the " << name << " orchard!" << endl;
 
-    // Final line, to print totalPrice
-    cout << "If you want them all, that will be $" << totalPrice << endl;
+    total_cost = num_apples * price_per_apple;
 
-    return 0;
+    cout << "You have " << num_apples << " apples" << endl;
+    cout << "Each apple costs $" << price_per_apple << endl;
+    cout << "The total is: $" << total_cost << endl;
 }
