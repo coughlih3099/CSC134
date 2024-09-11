@@ -30,6 +30,7 @@ int main() {
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         */
         choice = get_int();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         switch (choice) {
             case 1:
                 chat_bot();
@@ -75,7 +76,7 @@ int get_int() {
     while (cin.fail() || user_input <= 0) {
         cin.clear();
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        cout << "Please enter a valid number greater than 0: ";
+        cout << "Please enter a valid integer greater than 0: ";
         cin >> user_input;
     }
     return user_input;
@@ -117,7 +118,7 @@ double get_double() {
     while (cin.fail() || user_input <= 0) {
         cin.clear();
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        cout << "Please enter a valid number greater than 0: ";
+        cout << "Please enter a valid decimal number greater than 0.0: ";
         cin >> user_input;
     }
     return user_input;
@@ -191,6 +192,7 @@ void receipt_calculator() {
 * of two actions. From there, one leads to defeat, the other to victory.
 */
 void cyoa() {
+    int user_input = -1;
     cout << "\nQuestion 3: Choose Your Own Adventure\n";
     cout << "-------------------------------------\n";
     cout << "You're fishing on a moonlit night. The water of the lake ";
@@ -208,5 +210,61 @@ void cyoa() {
     cout << "\"Hi there\", says the creature. Responding rather timidly, \n";
     cout << "you ask, \"Who are you?\", to which the creature reponds, \n";
     cout << "\"I'm Old Gregg. Pleased to meet cha.\"\n";
-    cout << "Shaken by Gregg's appearance and flippant";
+    cout << "Shaken by Gregg's sudden appearance and flippant attitude you\n";
+    cout << "worriedly inquire, \"What do you want?\", Gregg flips the question\n";
+    cout << "asking the same of you. To which you hurriedly respond, \"Just\n";
+    cout << "taking the air. Not fishing,\" however, your hook is caught in\n";
+    cout << "Gregg's hair and he doesn't let you get far on your excuse\n";
+    cout << "Gregg proceeds to question you, \"You ever drunk Bailey's from a shoe?\"\n";
+    cout << "The question catches you off-guard, giving you pause on further questioning.\n";
+    cout << "Gregg contiues before giving you time to process his questions,\n";
+    cout << "\"I like you; what do you think of me?\", Gregg asks.\n";
+    cout << "---------------------------------------------------\n";
+     while (user_input < 1 || user_input > 2) {
+        cout << "+-------------------+\n";
+        cout << "|How do you respond?|\n";
+        cout << "|-------------------|\n";
+        cout << "|1. I don't know sir|\n";
+        cout << "|-------------------|\n";
+        cout << "|2. I don't like you|\n";
+        cout << "+-------------------+\n";
+        cout << "Response: ";
+        user_input = get_int();
+    }
+    cout << "\n";
+    if (user_input == 1) {
+        user_input = -1;
+        cout << "Gregg implores you, \"Make an assessment\"\n";
+        cout << "\n";
+        while (user_input < 1 || user_input > 2) {
+            cout << "+-----------------------------------------+\n";
+            cout << "|---------How do you respond?-------------|\n";
+            cout << "|-----------------------------------------|\n";
+            cout << "|1. I think you're a nice modern gentleman|\n";
+            cout << "|-----------------------------------------|\n";
+            cout << "|2. I think you're a scaly man fish-------|\n";
+            cout << "+-----------------------------------------+\n";
+            cout << "Response: ";
+            user_input = get_int();
+        }
+        if (user_input == 1) {
+            cout << "Gregg, suspicious of your response, accuses you of lying to him\n";
+            cout << "However, he reconsiders his position and uses his powers to render\n";
+            cout << "you unconscious, you awaken in his lair, sitting at a table\n";
+            cout << "Gregg places a succulent fish dinner on the table in front of you.\n";
+            cout << "\"I got an A in home econimics\", Gregg offers.\n";
+            cout << "\nYou win\n";
+        } else {
+            cout << "Gregg begrudgingly admits that you've confirmed his suspicions\n";
+            cout << "that he had about what you were already thinking about him. He sighs\n";
+            cout << "heavily before using his powers to strap you to a plaque\n";
+            cout << "which he then hangs in his lair\n";
+            cout << "\nGame Over\n";
+        }
+    } else {
+        cout << "Gregg has taken grave offense to your answer to his question\n";
+        cout << "and uses his mix-up powers to sink your boat causing you to\n";
+        cout << "be lost to his waters forevermore\n";
+        cout << "\nGame Over\n";
+    }
 }
