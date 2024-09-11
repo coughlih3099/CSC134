@@ -62,6 +62,7 @@ void print_main_menu() {
     cout << "---------------\n";
     cout << "1. Question 1 (chat bot)\n";
     cout << "2. Question 2 (receipt calculator)\n";
+    cout << "3. Question 3 (choose your own adventure)\n";
     cout << "5. All of the above\n";
     cout << "6. Quit\n";
     cout << "Please enter 1-6: ";
