@@ -1,5 +1,5 @@
 // CSC 134
-// M3HW - Bronze
+// M3HW - Silver
 // Harley Coughlin
 // 09/10/2024
 
@@ -13,6 +13,8 @@ using namespace std;
 void print_main_menu();
 void chat_bot();
 void receipt_calculator();
+void cyoa();
+int get_int();
 
 
 int main() {
@@ -20,11 +22,14 @@ int main() {
     int choice;
     while (keep_going) {
         print_main_menu();
+        /*
         cin >> choice;
         if (cin.fail()) {
             cin.clear();
         }
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        */
+        choice = get_int();
         switch (choice) {
             case 1:
                 chat_bot();
@@ -32,9 +37,13 @@ int main() {
             case 2:
                 receipt_calculator();
                 break;
+            case 3:
+                cyoa();
+                break;
             case 5:
                 chat_bot();
                 receipt_calculator();
+                cyoa();
                 break;
             case 6:
                 cout << "\nGoodbye!\n" << endl;
@@ -55,6 +64,21 @@ void print_main_menu() {
     cout << "5. All of the above\n";
     cout << "6. Quit\n";
     cout << "Please enter 1-6: ";
+}
+
+/**
+* @return an int > 0
+*/
+int get_int() {
+    int user_input = -1;
+    cin >> user_input;
+    while (cin.fail() || user_input <= 0) {
+        cin.clear();
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cout << "Please enter a valid number greater than 0: ";
+        cin >> user_input;
+    }
+    return user_input;
 }
 
 
@@ -85,7 +109,7 @@ void chat_bot() {
 
 /**
 * Prompts user for meal price
-* @return user_input
+* @return double > 0
 */
 double get_double() {
     double user_input = -1;
@@ -136,9 +160,7 @@ void receipt_calculator() {
     cout << "\nQuestion 2. Receipt Calculator\n";
     cout << "-------------------------------\n";
     cout << "Please enter the price of the meal: $";
-    do {
-        meal_price = get_double();
-    } while (meal_price <= 0);
+    meal_price = get_double();
     dining_in = get_dining_preference();
     if (dining_in) {
         tip_amount = meal_price * TIP_RATE;
@@ -160,4 +182,31 @@ void receipt_calculator() {
     }
     cout << "The tax is:" << setw(9) << "$" << setw(count) << setfill(' ') << tax_amount << "\n";
     cout << "The total is :" << setw(6) << "$" << total << "\n";
+}
+
+
+/**
+* Choose your own adventure game, offers the user 2 choices,
+* one answer leads to a game over, the other leads to a second choice
+* of two actions. From there, one leads to defeat, the other to victory.
+*/
+void cyoa() {
+    cout << "\nQuestion 3: Choose Your Own Adventure\n";
+    cout << "-------------------------------------\n";
+    cout << "You're fishing on a moonlit night. The water of the lake ";
+    cout << "is still save for the gentle lapping against the hull of your rowboat.\n";
+    cout << "You feel a tug on the line and pull with all your strength.\n";
+    cout << "To your surprise, a fog fills the air and when it clears, you find ";
+    cout << "sitting across from you in your boat, some form of humanoid creature.\n";
+    cout << "The creature has seaweed in place of hair, and is somehow rather ";
+    cout << "smartly dressed, at least from the waist up, wearing a black, button-up shirt,\n";
+    cout << "with a lime green tie, and a shiny, bright-green jacket,";
+    cout << "adorned with various fishing lures.\n";
+    cout << "It's outfit becomes a bit more confusing as its wearing, ";
+    cout << "a pastel pink tutu covers its scaly, green legs.\n";
+    cout << "Even more astonishingly, the creature addresses you, ";
+    cout << "\"Hi there\", says the creature. Responding rather timidly, \n";
+    cout << "you ask, \"Who are you?\", to which the creature reponds, \n";
+    cout << "\"I'm Old Gregg. Pleased to meet cha.\"\n";
+    cout << "Shaken by Gregg's appearance and flippant";
 }
