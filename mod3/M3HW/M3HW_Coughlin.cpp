@@ -1,5 +1,5 @@
 // CSC 134
-// M3HW - Silver
+// M3HW - Gold
 // Harley Coughlin
 // 09/10/2024
 
@@ -22,15 +22,7 @@ int main() {
     int choice;
     while (keep_going) {
         print_main_menu();
-        /*
-        cin >> choice;
-        if (cin.fail()) {
-            cin.clear();
-        }
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        */
         choice = get_int();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         switch (choice) {
             case 1:
                 chat_bot();
@@ -220,7 +212,7 @@ void cyoa() {
     cout << "The question catches you off-guard, giving you pause on further questioning.\n";
     cout << "Gregg contiues before giving you time to process his questions,\n";
     cout << "\"I like you; what do you think of me?\", Gregg asks.\n";
-    cout << "---------------------------------------------------\n";
+    cout << "\n";
      while (user_input < 1 || user_input > 2) {
         cout << "+-------------------+\n";
         cout << "|How do you respond?|\n";
@@ -235,7 +227,7 @@ void cyoa() {
     cout << "\n";
     if (user_input == 1) {
         user_input = -1;
-        cout << "Gregg implores you, \"Make an assessment\"\n";
+        cout << "Gregg implores you, \"Make an assessment..\"\n";
         cout << "\n";
         while (user_input < 1 || user_input > 2) {
             cout << "+-----------------------------------------+\n";
@@ -247,14 +239,15 @@ void cyoa() {
             cout << "+-----------------------------------------+\n";
             cout << "Response: ";
             user_input = get_int();
+            cout << "\n";
         }
         if (user_input == 1) {
             cout << "Gregg, suspicious of your response, accuses you of lying to him\n";
             cout << "However, he reconsiders his position and uses his powers to render\n";
             cout << "you unconscious, you awaken in his lair, sitting at a table\n";
             cout << "Gregg places a succulent fish dinner on the table in front of you.\n";
-            cout << "\"I got an A in home econimics\", Gregg offers.\n";
-            cout << "\nYou win\n";
+            cout << "\"I got an A in home economics\", Gregg offers.\n";
+            cout << "\n*~~*~* You win *~*~~*\n";
         } else {
             cout << "Gregg begrudgingly admits that you've confirmed his suspicions\n";
             cout << "that he had about what you were already thinking about him. He sighs\n";
