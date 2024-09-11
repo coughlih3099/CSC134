@@ -4,9 +4,11 @@
 // 09/10/2024
 
 
+#include <ctime>
 #include <iostream>
 #include <iomanip>
 #include <limits>
+#include <random>
 
 using namespace std;
 
@@ -14,6 +16,7 @@ void print_main_menu();
 void chat_bot();
 void receipt_calculator();
 void cyoa();
+void math_practice();
 int get_int();
 
 
@@ -33,10 +36,14 @@ int main() {
             case 3:
                 cyoa();
                 break;
+            case 4:
+                math_practice();
+                break;
             case 5:
                 chat_bot();
                 receipt_calculator();
                 cyoa();
+                math_practice();
                 break;
             case 6:
                 cout << "\nGoodbye!\n" << endl;
@@ -55,21 +62,22 @@ void print_main_menu() {
     cout << "1. Question 1 (chat bot)\n";
     cout << "2. Question 2 (receipt calculator)\n";
     cout << "3. Question 3 (choose your own adventure)\n";
+    cout << "4. Question 4 (math practice)\n";
     cout << "5. All of the above\n";
     cout << "6. Quit\n";
     cout << "Please enter 1-6: ";
 }
 
 /**
-* @return an int > 0
+* @return an int >= 0
 */
 int get_int() {
     int user_input = -1;
     cin >> user_input;
-    while (cin.fail() || user_input <= 0) {
+    while (cin.fail() || user_input < 0) {
         cin.clear();
         cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        cout << "Please enter a valid integer greater than 0: ";
+        cout << "Please enter a valid integer 0 or greater: ";
         cin >> user_input;
     }
     return user_input;
@@ -260,5 +268,32 @@ void cyoa() {
         cout << "and uses his mix-up powers to sink your boat causing you to\n";
         cout << "be lost to his waters forevermore\n";
         cout << "\nGame Over\n";
+    }
+}
+
+
+/**
+* Generates two single digit numbers at random,
+* prints the numbers as an addition problem.
+* asks user to solve and prints correct/incorrect
+*/
+void math_practice() {
+    // i feel like this is bad practice putting all the generation
+    // inside the function
+    random_device r;
+    seed_seq seed{r(), r()};
+    minstd_rand generator(seed);
+    int num1 = generator() % 10;
+    int num2 = generator() % 10;
+    int answer;
+    cout << "\nQuestion 4: Math Practice\n";
+    cout << "-------------------------\n";
+    cout << "What is " << num1 << " + " << num2 << "?";
+    cout << "\n";
+    answer = get_int();
+    if (answer == num1 + num2) {
+        cout << "Correct\n";
+    } else {
+        cout << "Incorrect\n";
     }
 }
