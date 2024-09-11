@@ -40,6 +40,7 @@ int main(void)
         Vector2 position;
         Vector2 speed;
         float radius;
+	float last_collision;
         Color color;
     } BALL;
 
@@ -65,6 +66,7 @@ int main(void)
     ball.radius = 10.0f;
     ball.color = ORANGE;
     ball.position = (Vector2) { paddle.x + paddle.width / 2.0, paddle.y - paddle.height + ball.radius / 2.0f - 1 };
+    ball.last_collision = 0.0f;
     int ball_rand;
 
     const int blocks_x_cap = 12;
@@ -112,6 +114,7 @@ int main(void)
             ball.speed.y -= 4.0f;
             ball.attached = false;
             ball.can_collide = true;
+            ball.last_collision = GetTime();
         }
 
         ball.position.x += ball.speed.x;
@@ -125,7 +128,7 @@ int main(void)
 
         // paddle collision
         ball_rand = GetRandomValue(0, 10);
-        if (CheckCollisionCircleRec(ball.position, ball.radius, paddle) && ball.can_collide) {
+        if (CheckCollisionCircleRec(ball.position, ball.radius, paddle) && ball.can_collide && ball.last_collision < GetTime() - 0.5f) {
             if (fabs(ball.speed.x) > 5.0f || fabs(ball.speed.x) < 3.0f) {
                 if (ball.speed.x < 0) {
                     ball.speed.x = -4.0f;
@@ -140,6 +143,7 @@ int main(void)
                     ball.speed.x -= ball_rand / 10.0;
                 }
             }
+	    ball.last_collision = GetTime();
             ball.speed.y *= -1;
         }
 
