@@ -197,6 +197,7 @@ int main(void)
 
         if (ball.attached) {
             DrawText("Press SPACE to launch ball", screen_width / 2.0f - 100, screen_height - screen_height / 6.0f, 20, YELLOW);
+            DrawText("Press A to move left and D to move right", screen_width / 2.0f - 100, screen_height - screen_height / 7.4f, 20, YELLOW);
         }
 
         DrawCircleV(ball.position, ball.radius, ball.color);
