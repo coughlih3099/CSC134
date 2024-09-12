@@ -281,10 +281,9 @@ void math_practice() {
     // i feel like this is bad practice putting all the generation
     // inside the function
     random_device r;
-    seed_seq seed{r(), r()};
-    minstd_rand generator(seed);
-    int num1 = generator() % 10;
-    int num2 = generator() % 10;
+    uniform_int_distribution<int> dist(0, 9);
+    int num1 = dist(r);
+    int num2 = dist(r);
     int answer;
     cout << "\nQuestion 4: Math Practice\n";
     cout << "-------------------------\n";
