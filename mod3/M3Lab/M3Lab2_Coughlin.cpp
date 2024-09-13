@@ -11,9 +11,13 @@ using namespace std;
 
 
 int get_grade();
+char get_letter(int number_grade);
 
 
 int main() {
+    bool keep_going = true;
+    int number_grade;
+    char grade_letter;
     return 0;
 }
 
@@ -30,4 +34,21 @@ int get_grade() {
         cin >> user_input;
     }
     return user_input;
+}
+
+
+char get_letter(int number_grade) {
+    char grade_letter;
+    if (number_grade < 60) {
+        grade_letter = 'F';
+    } else if (number_grade < 70) {
+        grade_letter = 'D';
+    } else if (number_grade < 80) {
+        grade_letter = 'C';
+    } else if (number_grade < 90) {
+        grade_letter = 'B';
+    } else {
+        grade_letter = 'A';
+    }
+    return grade_letter;
 }
