@@ -12,8 +12,6 @@ using namespace std;
 
 void print_main_menu();
 int get_choice();
-void play_game();
-void print_game_menu();
 int roll_dice();
 
 
@@ -27,23 +25,21 @@ int main() {
         print_main_menu();
         choice = get_choice();
         if (choice == 1) {
-            play_game();
         } else if (choice == 2) {
             keep_playing = false;
         }
     }
-
     return 0;
 }
 
 
 void print_main_menu() {
-    cout << "+---------------+\n";
-    cout << "|   Main Menu   |\n";
-    cout << "+---------------+\n";
-    cout << "| 1. Start Game |\n";
-    cout << "| 2. Quit       |\n";
-    cout << "+---------------+\n";
+    cout << "+-------------------+\n";
+    cout << "|     Main Menu     |\n";
+    cout << "+-------------------+\n";
+    cout << "| 1. Start New Game |\n";
+    cout << "| 2. Quit           |\n";
+    cout << "+-------------------+\n";
     cout << "\n";
 }
 
@@ -59,47 +55,6 @@ int get_choice() {
         cout << "Please enter a valid integer greater than 0: ";
     }
     return user_input;
-}
-
-
-void play_game() {
-    bool done = false;
-    int choice;
-    int dice_value;
-    while (!done) {
-        print_game_menu();
-        choice = get_choice();
-        if (choice == 1) {
-            dice_value = roll_dice();
-            cout << "You rolled: " << dice_value << "\n";
-            switch (dice_value) {
-                case 2:
-                case 3:
-                case 12:
-                    cout << "Craps!\n";
-                    done = true;
-                    break;
-                case 7:
-                case 11:
-                    cout << "Win!\n";
-                    done = true;
-                    break;
-            }
-        } else if (choice == 2) {
-            done = true;
-        }
-    }
-}
-
-
-void print_game_menu() {
-    cout << "+---------------+\n";
-    cout << "|   Game Menu   |\n";
-    cout << "+---------------+\n";
-    cout << "| 1. Roll Dice  |\n";
-    cout << "| 2. Quit       |\n";
-    cout << "+---------------+\n";
-    cout << "\n";
 }
 
 
