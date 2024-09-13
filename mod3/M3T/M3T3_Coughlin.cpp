@@ -16,9 +16,7 @@ int roll_dice();
 
 
 int main() {
-    int num_rolls = 0;
     int choice;
-    int dice_value;
     bool keep_playing = true;
     cout << "Let's play some Craps!\n";
     while (keep_playing) {
@@ -55,6 +53,62 @@ int get_choice() {
         cout << "Please enter a valid integer greater than 0: ";
     }
     return user_input;
+}
+
+
+void play_game() {
+    bool done = false;
+    int choice;
+    int dice_value;
+    int num_rolls = 0;
+    int point_num;
+    while (!done) {
+        print_game_menu();
+        choice = get_choice();
+        if (choice == 1) {
+            dice_value = roll_dice();
+            num_rolls++;
+            cout << "You rolled: " << dice_value << "\n";
+            if (num_rolls == 1) {
+                switch (dice_value) {
+                    case 2:
+                    case 3:
+                    case 12:
+                        cout << "Craps!\n";
+                        done = true;
+                        break;
+                    case 7:
+                    case 11:
+                        cout << "Win!\n";
+                        done = true;
+                        break;
+                    default:
+                        point_num = dice_value;
+                }
+            } else {
+                if (dice_value == point_num) {
+                    cout << "You win\n";
+                    done = true;
+                } else if (dice_value == 7) {
+                    cout << "You lose\n";
+                    done = true;
+                }
+            }
+        } else if (choice == 2) {
+            done = true;
+        }
+    }
+}
+
+
+void print_game_menu() {
+    cout << "+---------------+\n";
+    cout << "|   Game Menu   |\n";
+    cout << "+---------------+\n";
+    cout << "| 1. Roll Dice  |\n";
+    cout << "| 2. Quit       |\n";
+    cout << "+---------------+\n";
+    cout << "\n";
 }
 
 
