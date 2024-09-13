@@ -13,7 +13,7 @@ using namespace std;
 void print_main_menu();
 int get_choice();
 void play_game();
-void print_game_menu();
+void print_game_menu(int point);
 int roll_dice();
 
 
@@ -36,13 +36,13 @@ int main() {
 
 
 void print_main_menu() {
-    cout << "+---------------+\n";
+    cout << "\n+---------------+\n";
     cout << "|   Main Menu   |\n";
     cout << "+---------------+\n";
     cout << "| 1. Start Game |\n";
     cout << "| 2. Quit       |\n";
     cout << "+---------------+\n";
-    cout << "\n";
+    cout << "Choice: ";
 }
 
 
@@ -65,9 +65,9 @@ void play_game() {
     int choice;
     int dice_value;
     int num_rolls = 0;
-    int point_num;
+    int point_num = 0;
     while (!done) {
-        print_game_menu();
+        print_game_menu(point_num);
         choice = get_choice();
         if (choice == 1) {
             dice_value = roll_dice();
@@ -105,21 +105,24 @@ void play_game() {
 }
 
 
-void print_game_menu() {
-    cout << "+---------------+\n";
+void print_game_menu(int point) {
+    cout << "\n+---------------+\n";
     cout << "|   Game Menu   |\n";
+    if (point > 0) {
+        cout << "|Point Number:" << point << "|\n";
+    }
     cout << "+---------------+\n";
     cout << "| 1. Roll Dice  |\n";
     cout << "| 2. Quit       |\n";
     cout << "+---------------+\n";
-    cout << "\n";
+    cout << "Choice: ";
 }
 
 
 int roll_dice() {
     int die_1, die_2, total;
     random_device r;
-    seed_seq seed(r(), r());
+    seed_seq seed{r(), r()};
     default_random_engine rando(seed);
     uniform_int_distribution dice(1, 6);
     die_1 = dice(rando);
