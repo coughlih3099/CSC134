@@ -21,6 +21,7 @@ int main() {
     cout << "Enter your numerical grade: ";
     number_grade = get_numeric_grade();
     grade_letter = get_grade_letter(number_grade);
+    cout << "Your letter grade is: " << grade_letter << endl;
     return 0;
 }
 
