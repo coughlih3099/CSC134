@@ -11,7 +11,7 @@ using namespace std;
 
 
 int get_numeric_grade();
-char get_letter(int number_grade);
+char get_grade_letter(int number_grade);
 
 
 int main() {
@@ -20,6 +20,7 @@ int main() {
     char grade_letter;
     cout << "Enter your numerical grade: ";
     number_grade = get_numeric_grade();
+    grade_letter = get_grade_letter(number_grade);
     return 0;
 }
 
@@ -39,7 +40,7 @@ int get_numeric_grade() {
 }
 
 
-char get_letter(int number_grade) {
+char get_grade_letter(int number_grade) {
     char grade_letter;
     if (number_grade < 60) {
         grade_letter = 'F';
