@@ -43,7 +43,7 @@ double get_double() {
     cin >> user_input;
     while (cin.fail() || user_input <= 0) {
         cin.clear();
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter a valid decimal number greater than 0.0: ";
         cin >> user_input;
     }
