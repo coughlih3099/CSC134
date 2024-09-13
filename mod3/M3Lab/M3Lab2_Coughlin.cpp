@@ -10,7 +10,7 @@
 using namespace std;
 
 
-int get_grade();
+int get_numeric_grade();
 char get_letter(int number_grade);
 
 
@@ -18,11 +18,13 @@ int main() {
     bool keep_going = true;
     int number_grade;
     char grade_letter;
+    cout << "Enter your numerical grade: ";
+    number_grade = get_numeric_grade();
     return 0;
 }
 
 
-int get_grade() {
+int get_numeric_grade() {
     int user_input;
     cin >> user_input;
     while (cin.fail() || user_input < 0 || user_input > 100) {
