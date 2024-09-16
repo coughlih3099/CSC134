@@ -92,11 +92,13 @@ void chat_bot() {
     string reply;
     cout << "\nQuestion 1. Chat bot\n";
     cout << "-------------------\n";
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     for (int i = 1; i <= 3; i++) {
         cout << "Sample Run " << i << "\n";
         cout << "Hello, I'm a C++ program!\n";
         cout << "Do you like me? Please type yes or no.\n";
-        cin >> reply;
+        getline(cin, reply);
         if (reply == "yes") {
             cout << "That's great! I'm sure we'll get along.\n";
         } else if (reply == "no") {
