@@ -124,7 +124,7 @@ int roll_dice() {
     random_device r;
     seed_seq seed{r(), r()};
     default_random_engine rando(seed);
-    uniform_int_distribution dice(1, 6);
+    uniform_int_distribution<int> dice(1, 6);
     die_1 = dice(rando);
     die_2 = dice(rando);
     total = die_1 + die_2;
