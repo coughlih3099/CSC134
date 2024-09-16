@@ -1,61 +1,43 @@
 // CSC 134
-// M3T1 - Area of Rectangles
+// M3T2
 // Harley Coughlin
-// 09/12/2024
+// 09/16/2024
 
 
 #include <iostream>
-#include <limits>
 
 using namespace std;
 
-double get_double();
-
-
 int main() {
-    double rectangles[2][2];
+    // setup variables
+    double width1, width2, length1, length2;
     double area1, area2;
-    cout << "This program calculates the area of two triangles\n";
-    cout << "Then tells which area is larger or if they're the same\n";
-    cout << "------------------------------------------------------\n";
-    for (int i = 0; i < 2; i++) {
-        for (int j = 0; j < 2; j++) {
-            if (j == 0) {
-                cout << "Enter the length for triangle " << i + 1 << ": ";
-            } else {
-                cout << "Enter the width for triangle " << i + 1 << ": ";
-            }
-            rectangles[i][j] = get_double();
-        }
-    }
-    area1 = rectangles[0][0] * rectangles[0][1];
-    area2 = rectangles[1][0] * rectangles[1][1];
-    cout << "Area 1: " << area1 << "\n";
-    cout << "Area 2: " << area2 << "\n";
-    if (area1 > area2) {
-        cout << "Area 1 is greater than Area 2" << endl;
-    } else if (area1 < area2) {
-        cout << "Area 2 is greater than Area 1" << endl;
-    } else {
-        cout << "The areas are equal" << endl;
-    }
-    return 0;
+
+    cout << "M3T1 - Area of two rectangles" << endl;
+    cout << "Width of first rectangle: ";
+    cin >> width1;
+    cout << "Length of first rectangle: ";
+    cin >> length1;
+    cout << "Width of second rectangle: ";
+    cin >> width2;
+    cout << "Length of second rectangle: ";
+    cin >> length2;
+    cout << "\n";
+
+    // calc area
+    area1 = width1 * length1;
+    area2 = width2 * length2;
+
+   // print results
+   cout << "Area of first triangle: " << area1 << "\n";
+   cout << "Area of second triangle: " << area2 << "\n";
+
+   // tell which is larger
+   if (area1 > area2) {
+    cout << "The first rectangle is larger." << endl;
+   } else if (area1 < area2) {
+    cout << "The second rectangle is larger." << endl;
+   } else {
+    cout << "The rectangles are the same size." << endl;
+   }
 }
-
-/**
-* Prompts user for a double
-* @return double > 0
-*/
-double get_double() {
-    double user_input = -1;
-    cin >> user_input;
-    while (cin.fail() || user_input <= 0) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        cout << "Please enter a valid decimal number greater than 0.0: ";
-        cin >> user_input;
-    }
-    return user_input;
-}
-
-
