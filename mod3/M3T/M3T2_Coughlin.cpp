@@ -13,7 +13,7 @@ int main() {
     double width1, width2, length1, length2;
     double area1, area2;
 
-    cout << "M3T1 - Area of two rectangles" << endl;
+    cout << "M3T2 - Area of two rectangles" << endl;
     cout << "Width of first rectangle: ";
     cin >> width1;
     cout << "Length of first rectangle: ";
