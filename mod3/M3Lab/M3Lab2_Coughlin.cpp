@@ -51,7 +51,7 @@ char get_grade_letter(int number_grade) {
         grade_letter = 'C';
     } else if (number_grade < 90) {
         grade_letter = 'B';
-    } else {
+    } else if (number_grade <= 100) {
         grade_letter = 'A';
     }
     return grade_letter;
