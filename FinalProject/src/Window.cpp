@@ -34,13 +34,12 @@ Window::Window(int window_size_x, int window_size_y, ConfigFlags flags, std::str
 }
 
 Window::~Window() {
-    if (WindowShouldClose()) {
-        CloseWindow();
-    }
+    CloseWindow();
 }
 
 
 const std::array<ConfigFlags, 16> all_flags = {
+    // These flags can be set whenever
     FLAG_VSYNC_HINT,   // Set to try enabling V-Sync on GPU
     FLAG_FULLSCREEN_MODE,   // Set to run program in fullscreen
     FLAG_WINDOW_RESIZABLE,   // Set to allow resizable window
@@ -51,12 +50,13 @@ const std::array<ConfigFlags, 16> all_flags = {
     FLAG_WINDOW_UNFOCUSED,   // Set to window non focused
     FLAG_WINDOW_TOPMOST,   // Set to window always on top
     FLAG_WINDOW_ALWAYS_RUN,   // Set to allow windows running while minimized
-    FLAG_WINDOW_TRANSPARENT,   // Set to allow transparent framebuffer
-    FLAG_WINDOW_HIGHDPI,   // Set to support HighDPI
     FLAG_WINDOW_MOUSE_PASSTHROUGH, // Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
     FLAG_BORDERLESS_WINDOWED_MODE, // Set to run program in borderless windowed mode
-    FLAG_MSAA_4X_HINT,   // Set to try enabling MSAA 4X
-    FLAG_INTERLACED_HINT    // Set to try enabling interlaced video format (for V3D)
+    FLAG_INTERLACED_HINT,    // Set to try enabling interlaced video format (for V3D)
+    // These flags can only be set before window creation
+    FLAG_WINDOW_TRANSPARENT,   // Set to allow transparent framebuffer
+    FLAG_WINDOW_HIGHDPI,   // Set to support HighDPI
+    FLAG_MSAA_4X_HINT   // Set to try enabling MSAA 4X
 };
 
 
