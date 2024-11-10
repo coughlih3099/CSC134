@@ -5,6 +5,7 @@
 #include <vector>
 
 class Window {
+ private:
     int window_size_x;
     int window_size_y;
     ConfigFlags flags;
