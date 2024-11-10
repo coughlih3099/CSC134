@@ -60,22 +60,32 @@
 ehthumbs.db
 Thumbs.db
 
+# CMake #
+#########
+build/
+CMakeFiles/
+CMakeCache.txt
+
 # Python #
 ##########
 __pycache__/
-
-# Media #
-#########
-*.png
-*.jpeg
+*.pyc
+env/
+.venv/
 
 # Extras #
 ##########
 .gitignore
-*.docx
-*.doc
+.docx
+.png
+.jpeg
+.doc
 .class
 .pyc
-*.pdf
+.zip
+.pdf
 .venv
 .vscode/
+.old
+.cache
+.cache/
