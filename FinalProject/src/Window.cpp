@@ -2,12 +2,35 @@
 #include <array>
 #include <string>
 #include <vector>
+#include <utility>
 #include "../include/Window.hpp"
 
 
-Window::Window() {
-    window_size_x = 0;
-    window_size_y = 0;
+Window::Window() :
+    window_size_x(1280),
+    window_size_y(720),
+    flags(),  // Flags initialized to zero in Raylib
+    window_name("Raylib Window")
+{
+    InitWindow(window_size_x, window_size_y, window_name.c_str());
+}
+
+Window::Window(int window_size_x, int window_size_y, std::string title) :
+    window_size_x(window_size_x),
+    window_size_y(window_size_y),
+    flags(),  // Flags initialized to zero in Raylib
+    window_name(std::move(title))
+{
+    InitWindow(window_size_x, window_size_y, window_name.c_str());
+}
+
+Window::Window(int window_size_x, int window_size_y, ConfigFlags flags, std::string title) :
+    window_size_x(window_size_x),
+    window_size_y(window_size_y),
+    flags(flags),
+    window_name(std::move(title))
+{
+    InitWindow(window_size_x, window_size_y, window_name.c_str());
 }
 
 Window::~Window() {

@@ -9,9 +9,17 @@ class Window {
     int window_size_x;
     int window_size_y;
     ConfigFlags flags;
+    std::string window_name;
 
  public:
+    // Default params: Window Size = 1280x720, Title = "Raylib Window", no flags
     Window();
+
+    // no flags
+    Window(int window_size_x, int window_size_y, std::string title);
+
+    // with flags
+    Window(int window_size_x, int window_size_y, ConfigFlags flags, std::string title);
     ~Window();
 
     /**
