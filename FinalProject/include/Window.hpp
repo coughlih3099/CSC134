@@ -11,17 +11,16 @@ class Window {
     int window_size_x;
     int window_size_y;
     ConfigFlags flags;
+    bool test_mode;
     std::string window_name;
 
  public:
     // Default params: Window Size = 1280x720, Title = "Raylib Window", no flags
-    Window();
-
-    // no flags
-    Window(int window_size_x, int window_size_y, std::string title);
-
-    // with flags
-    Window(int window_size_x, int window_size_y, ConfigFlags flags, std::string title);
+    explicit Window(bool test_mode = false);
+    Window(int window_size_x, int window_size_y, std::string title,
+           bool test_mode = false);
+    Window(int window_size_x, int window_size_y, ConfigFlags flags,
+           std::string title, bool test_mode = false);
     ~Window();
 
     /**
@@ -30,21 +29,8 @@ class Window {
      */
     std::vector<std::string> get_enabled_flags();
 
-    /**
-     * Window width getter
-     * @return, window width
-     */
-    int get_window_width();
-
-    /**
-     * Window height getter
-     * @return, window height
-     */
-    int get_window_height();
-
-    /**
-     * Window title getter
-     * @return, window title
-     */
-    std::string get_window_title();
+    int get_width() const { return window_size_x; }
+    int get_height() const { return window_size_y; }
+    std::string get_title() const { return window_name; }
+    ConfigFlags get_flags() const { return flags; }
 };

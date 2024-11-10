@@ -6,35 +6,51 @@
 #include "../include/Window.hpp"
 
 
-Window::Window() :
+Window::Window(bool test_mode) :
     window_size_x(1280),
     window_size_y(720),
-    flags(),  // Flags initialized to zero in Raylib
-    window_name("Raylib Window")
+    flags(static_cast<ConfigFlags>(0)),  // Flags initialized to zero in Raylib
+    window_name("Raylib Window"),
+    test_mode(test_mode)
 {
-    InitWindow(window_size_x, window_size_y, window_name.c_str());
+    if (!test_mode) {
+        InitWindow(window_size_x, window_size_y, window_name.c_str());
+    }
 }
 
-Window::Window(int window_size_x, int window_size_y, std::string title) :
+Window::Window(int window_size_x, int window_size_y, std::string title,
+               bool test_mode) :
     window_size_x(window_size_x),
     window_size_y(window_size_y),
-    flags(),  // Flags initialized to zero in Raylib
-    window_name(std::move(title))
+    flags(static_cast<ConfigFlags>(0)),  // Flags initialized to zero in Raylib
+    window_name(std::move(title)),
+    test_mode(test_mode)
 {
-    InitWindow(window_size_x, window_size_y, window_name.c_str());
+    if (!test_mode) {
+        InitWindow(window_size_x, window_size_y, window_name.c_str());
+    }
 }
 
-Window::Window(int window_size_x, int window_size_y, ConfigFlags flags, std::string title) :
+Window::Window(int window_size_x, int window_size_y, ConfigFlags flags,
+               std::string title, bool test_mode) :
     window_size_x(window_size_x),
     window_size_y(window_size_y),
     flags(flags),
-    window_name(std::move(title))
+    window_name(std::move(title)),
+    test_mode(test_mode)
 {
-    InitWindow(window_size_x, window_size_y, window_name.c_str());
+    if (!test_mode) {
+        InitWindow(window_size_x, window_size_y, window_name.c_str());
+        if (flags != 0) {
+            SetWindowState(flags);
+        }
+    }
 }
 
 Window::~Window() {
-    CloseWindow();
+    if (!test_mode) {
+        CloseWindow();
+    }
 }
 
 
@@ -118,29 +134,21 @@ std::string get_flag_string(ConfigFlags flag) {
 
 std::vector<std::string> Window::get_enabled_flags() {
     // There is a max of 16 flags that can be enabled
-    std::vector<std::string> enabled_flags(16);
-    for (const auto& flag : all_flags) {
-        if (IsWindowState(flag)) {
-            enabled_flags.push_back(get_flag_string(flag));
+    std::vector<std::string> enabled_flags;
+
+    if (test_mode) {
+        for (const auto& flag : all_flags) {
+            if (flags & flag) {
+                enabled_flags.push_back(get_flag_string(flag));
+            }
+        }
+    } else {
+        for (const auto& flag : all_flags) {
+            if (IsWindowState(flag)) {
+                enabled_flags.push_back(get_flag_string(flag));
+            }
         }
     }
-    if (enabled_flags.size() < 16) {
-        enabled_flags.shrink_to_fit();
-    }
+
     return enabled_flags;
-}
-
-
-int Window::get_window_width() {
-    return window_size_x;
-}
-
-
-int Window::get_window_height() {
-    return window_size_y;
-}
-
-
-std::string Window::get_window_title() {
-    return window_name;
 }
