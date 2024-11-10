@@ -95,11 +95,14 @@ std::string get_flag_string(ConfigFlags flag) {
 
 std::vector<std::string> Window::get_enabled_flags() {
     // There is a max of 16 flags that can be enabled
-    std::vector<std::string> enabled_flags;
+    std::vector<std::string> enabled_flags(16);
     for (const auto& flag : all_flags) {
         if (IsWindowState(flag)) {
             enabled_flags.push_back(get_flag_string(flag));
         }
+    }
+    if (enabled_flags.size() < 16) {
+        enabled_flags.shrink_to_fit();
     }
     return enabled_flags;
 }
