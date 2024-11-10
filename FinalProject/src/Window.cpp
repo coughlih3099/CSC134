@@ -93,23 +93,23 @@ std::string get_flag_string(ConfigFlags flag) {
         case FLAG_WINDOW_ALWAYS_RUN:
             flag_string = "Run while minimized";
             break;
-        case FLAG_WINDOW_TRANSPARENT:
-            flag_string = "Allow transparent framebuffer";
-            break;
-        case FLAG_WINDOW_HIGHDPI:
-            flag_string = "HighDPI support";
-            break;
         case FLAG_WINDOW_MOUSE_PASSTHROUGH:
             flag_string = "Mouse passthrough";
             break;
         case FLAG_BORDERLESS_WINDOWED_MODE:
             flag_string = "Borderless windowed mode";
             break;
-        case FLAG_MSAA_4X_HINT:
-            flag_string = "MSAA 4X enabled";
-            break;
         case FLAG_INTERLACED_HINT:
             flag_string = "Interlaced";
+            break;
+        case FLAG_WINDOW_TRANSPARENT:
+            flag_string = "Allow transparent framebuffer";
+            break;
+        case FLAG_WINDOW_HIGHDPI:
+            flag_string = "HighDPI support";
+            break;
+        case FLAG_MSAA_4X_HINT:
+            flag_string = "MSAA 4X enabled";
             break;
     }
     return flag_string;
@@ -128,4 +128,19 @@ std::vector<std::string> Window::get_enabled_flags() {
         enabled_flags.shrink_to_fit();
     }
     return enabled_flags;
+}
+
+
+int Window::get_window_width() {
+    return window_size_x;
+}
+
+
+int Window::get_window_height() {
+    return window_size_y;
+}
+
+
+std::string Window::get_window_title() {
+    return window_name;
 }
