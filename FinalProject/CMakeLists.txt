@@ -9,10 +9,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
-# Find ncurses
-find_package(Raylib REQUIRED)
+# Find raylib using CMake config
+find_package(raylib 4.5.0 REQUIRED)
 
-# add source files
+# Add source files
 set(SOURCES
     src/main.cpp
     src/Window.cpp
@@ -21,16 +21,13 @@ set(SOURCES
 # Add include directories
 include_directories(
     ${PROJECT_SOURCE_DIR}/include
-    ${RAYLIB_INCLUDE_DIR}
 )
 
 # Create main executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Link against ncurses
-target_link_libraries(
-    ${PROJECT_NAME} PRIVATE ${RAYLIB_LIBRARIES}
-)
+# Link against raylib
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Testing setup
 enable_testing()
