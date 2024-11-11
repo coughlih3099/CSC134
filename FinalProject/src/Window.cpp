@@ -6,41 +6,41 @@
 #include "../include/Window.hpp"
 
 
-Window::Window(bool test_mode) :
-    window_size_x(1280),
-    window_size_y(720),
-    flags(static_cast<ConfigFlags>(0)),  // Flags initialized to zero in Raylib
-    window_name("Raylib Window"),
-    test_mode(test_mode)
+Window::Window(bool is_test_mode) :
+    size_current_width(1280),
+    size_current_height(720),
+    flags(static_cast<ConfigFlags>(0)),
+    title("Raylib Window"),
+    is_test_mode(is_test_mode)
 {
-    if (!test_mode) {
-        InitWindow(window_size_x, window_size_y, window_name.c_str());
+    if (!is_test_mode) {
+        InitWindow(size_current_width, size_current_height, title.c_str());
     }
 }
 
-Window::Window(int window_size_x, int window_size_y, std::string title,
-               bool test_mode) :
-    window_size_x(window_size_x),
-    window_size_y(window_size_y),
-    flags(static_cast<ConfigFlags>(0)),  // Flags initialized to zero in Raylib
-    window_name(std::move(title)),
-    test_mode(test_mode)
+Window::Window(int size_current_width, int size_current_height, std::string title,
+               bool is_test_mode) :
+    size_current_width(size_current_width),
+    size_current_height(size_current_height),
+    flags(static_cast<ConfigFlags>(0)),
+    title(std::move(title)),
+    is_test_mode(is_test_mode)
 {
-    if (!test_mode) {
-        InitWindow(window_size_x, window_size_y, window_name.c_str());
+    if (!is_test_mode) {
+        InitWindow(size_current_width, size_current_height, title.c_str());
     }
 }
 
-Window::Window(int window_size_x, int window_size_y, ConfigFlags flags,
-               std::string title, bool test_mode) :
-    window_size_x(window_size_x),
-    window_size_y(window_size_y),
+Window::Window(int size_current_width, int size_current_height, ConfigFlags flags,
+               std::string title, bool is_test_mode) :
+    size_current_width(size_current_width),
+    size_current_height(size_current_height),
     flags(flags),
-    window_name(std::move(title)),
-    test_mode(test_mode)
+    title(std::move(title)),
+    is_test_mode(is_test_mode)
 {
-    if (!test_mode) {
-        InitWindow(window_size_x, window_size_y, window_name.c_str());
+    if (!is_test_mode) {
+        InitWindow(size_current_width, size_current_height, title.c_str());
         if (flags != 0) {
             SetWindowState(flags);
         }
@@ -48,7 +48,7 @@ Window::Window(int window_size_x, int window_size_y, ConfigFlags flags,
 }
 
 Window::~Window() {
-    if (!test_mode) {
+    if (!is_test_mode) {
         CloseWindow();
     }
 }
@@ -136,7 +136,7 @@ std::vector<std::string> Window::get_enabled_flags() {
     // There is a max of 16 flags that can be enabled
     std::vector<std::string> enabled_flags;
 
-    if (test_mode) {
+    if (is_test_mode) {
         for (const auto& flag : all_flags) {
             if (flags & flag) {
                 enabled_flags.push_back(get_flag_string(flag));
