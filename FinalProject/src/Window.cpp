@@ -7,7 +7,6 @@
 
 
 Window::Window(bool is_test_mode) :
-    title("Raylib Window"),
     is_test_mode(is_test_mode)
 {
     if (!is_test_mode) {
