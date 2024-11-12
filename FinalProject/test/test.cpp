@@ -150,18 +150,12 @@ TEST_SUITE("Window Properties") {
         }
     }
 
-    /* TODO (coughlih3099): Update this test once the ability to set flags is
-     * added
     TEST_CASE("Remove flags from default window") {
         const bool test_mode = true;
         Window window(test_mode);
 
         CHECK_FALSE(window.remove_flags());
-
-        SUBCASE("Add a flag and then remove") {
-        }
     }
-    */
 
     TEST_CASE("Remove flags from window initialized with flags") {
         const int test_width = 800;
