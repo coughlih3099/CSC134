@@ -246,3 +246,57 @@ bool Window::set_size_maximum(int width, int height) {
 
     return (width == get_maximum_width() && height == get_maximum_height());
 }
+
+
+bool Window::set_flag(ConfigFlags flags_to_set) {
+    if (flags_to_set & FLAG_WINDOW_TRANSPARENT) {
+        TraceLog(LOG_WARNING, "Transparent window can only be set on initialization");
+        return false;
+    }
+
+    if (flags_to_set & FLAG_WINDOW_HIGHDPI) {
+        TraceLog(LOG_WARNING, "Highdpi can only be set on initialization");
+        return false;
+    }
+
+    if (flags_to_set & FLAG_MSAA_4X_HINT) {
+        TraceLog(LOG_WARNING, "MSAA 4X can only be set on initialization");
+        return false;
+    }
+
+
+    if (is_test_mode) {
+        flags = static_cast<ConfigFlags>(flags | flags_to_set);
+    } else {
+        SetWindowState(flags_to_set);
+        flags = get_flags();
+    }
+
+    return (flags & flags_to_set) == flags_to_set;
+}
+
+
+bool Window::remove_flags() {
+    if (flags == 0) {
+        TraceLog(LOG_WARNING, "No flags set");
+        return false;
+    }
+
+    ClearWindowState(flags);
+    flags = get_flags();
+
+    return flags == 0;
+}
+
+
+bool Window::remove_flags(ConfigFlags flags_to_remove) {
+    if (!(flags & flags_to_remove)) {
+        TraceLog(LOG_WARNING, "Trying to remove flags that aren't set");
+        return false;
+    }
+
+    ClearWindowState(flags_to_remove);
+    flags = static_cast<ConfigFlags>(flags & ~flags_to_remove);
+
+    return (flags & flags_to_remove) == 0;
+}

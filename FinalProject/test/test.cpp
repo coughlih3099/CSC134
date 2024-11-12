@@ -118,4 +118,90 @@ TEST_SUITE("Window Properties") {
             CHECK_FALSE(window.set_size_maximum(50, 50));
         }
     }
+
+    TEST_CASE("Add flags to initialized window") {
+        const bool test_mode = true;
+        Window window(test_mode);
+
+        SUBCASE("Adding test flags - valid") {
+            ConfigFlags test_flags = static_cast<ConfigFlags>(
+                FLAG_VSYNC_HINT | FLAG_FULLSCREEN_MODE);
+
+            CHECK(window.set_flag(test_flags));
+
+            auto enabled_flags = window.get_enabled_flags();
+            CHECK_EQ(enabled_flags.size(), 2);
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "V-Sync") != enabled_flags.end()));
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "Fullscreen") != enabled_flags.end()));
+        }
+
+        SUBCASE("Adding test flags - invalid") {
+            ConfigFlags test_flags = static_cast<ConfigFlags>(
+                FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT);
+
+            CHECK_FALSE(window.set_flag(test_flags));
+
+            auto enabled_flags = window.get_enabled_flags();
+            CHECK_NE(enabled_flags.size(), 1);
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "V-Sync") == enabled_flags.end()));
+        }
+    }
+
+    /* TODO (coughlih3099): Update this test once the ability to set flags is
+     * added
+    TEST_CASE("Remove flags from default window") {
+        const bool test_mode = true;
+        Window window(test_mode);
+
+        CHECK_FALSE(window.remove_flags());
+
+        SUBCASE("Add a flag and then remove") {
+        }
+    }
+    */
+
+    TEST_CASE("Remove flags from window initialized with flags") {
+        const int test_width = 800;
+        const int test_height = 600;
+        ConfigFlags test_flags = static_cast<ConfigFlags>(FLAG_FULLSCREEN_MODE |
+                                                          FLAG_WINDOW_ALWAYS_RUN |
+                                                          FLAG_VSYNC_HINT);
+        const std::string test_title = "Remove flags test";
+        const bool test_mode = true;
+
+        Window window(test_width, test_height, test_flags, test_title, test_mode);
+
+        SUBCASE("Remove all flags") {
+            CHECK(window.remove_flags(window.get_flags()));
+        }
+
+        SUBCASE("Remove a flag") {
+            CHECK(window.remove_flags(static_cast<ConfigFlags>(FLAG_FULLSCREEN_MODE)));
+
+            auto enabled_flags = window.get_enabled_flags();
+            CHECK_EQ(enabled_flags.size(), 2);
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "Run while minimized") != enabled_flags.end()));
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "V-Sync") != enabled_flags.end()));
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "Fullscreen") == enabled_flags.end()));
+        }
+
+        SUBCASE("Remove more than one flag but not all") {
+            CHECK(window.remove_flags(static_cast<ConfigFlags>(FLAG_VSYNC_HINT | FLAG_WINDOW_ALWAYS_RUN)));
+
+            auto enabled_flags = window.get_enabled_flags();
+            CHECK_EQ(enabled_flags.size(), 1);
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "Fullscreen") != enabled_flags.end()));
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "Run while minimized") == enabled_flags.end()));
+            CHECK((std::find(enabled_flags.begin(), enabled_flags.end(),
+                             "V-Sync") == enabled_flags.end()));
+        }
+    }
 }
