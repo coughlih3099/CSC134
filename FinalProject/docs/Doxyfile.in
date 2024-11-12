@@ -12,7 +12,12 @@ FILE_PATTERNS           = *.cpp \
                           *.h
 RECURSIVE               = YES
 EXCLUDE_PATTERNS        = */test/* \
-                          */build/*
+                          */build/* \
+                          */doctest.h \
+                          */doctest/* \
+                          *doctest*
+EXCLUDE_SYMBOLS         = doctest::* \
+                          *doctest*
 
 # Output settings
 OUTPUT_DIRECTORY        = @DOXYGEN_OUTPUT_DIR@
