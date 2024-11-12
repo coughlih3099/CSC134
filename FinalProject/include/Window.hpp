@@ -89,4 +89,26 @@ class Window {
      * @return true if maximum size changed else false
      */
     bool set_size_maximum(int width, int height);
+
+    /**
+     * @brief Set flags on active window
+     *
+     * Will set a flag or flags for the active window. Will fail if you try to
+     * set FLAG_WINDOW_TRANSPARENT, FLAG_WINDOW_HIGHDPI, or FLAG_MSAA_4X_HINT,
+     * as those can only be set before window creation
+     *
+     * @return true if success
+     */
+    bool set_flag(ConfigFlags flags_to_set);
+
+    /**
+     * @brief Removes state flags from window
+     *
+     * Depending on which overload is used, this function will remove all flags,
+     * or specified flags.
+     *
+     * @return true if the flag has been removed
+     */
+    bool remove_flags();
+    bool remove_flags(ConfigFlags flags_to_remove);
 };
