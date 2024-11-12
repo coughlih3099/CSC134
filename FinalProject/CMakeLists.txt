@@ -9,6 +9,31 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g")
 
+# Find Doxygen package
+find_package(Doxygen)
+
+if(DOXYGEN_FOUND)
+    # Set Doxygen input and output directories
+    set(DOXYGEN_INPUT_DIR ${PROJECT_SOURCE_DIR})
+    set(DOXYGEN_OUTPUT_DIR ${PROJECT_BINARY_DIR}/docs)
+
+    # Copy Doxyfile.in to buid directory
+    configure_file(
+        ${PROJECT_SOURCE_DIR}/doc/Doxyfile.in
+        ${PROJECT_BINARY_DIR}/Doxyfile @ONLY
+    )
+
+    # Add custom target for documentation
+    add_custom_target(docs
+        COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/Doxyfile
+        WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+        COMMENT "Generating documentation with Doxygen"
+        VERBATIM
+    )
+else()
+    message(STATUS "Doxygen not found, documentation will not be built")
+endif()
+
 # Find raylib using CMake config
 find_package(raylib 4.5.0 REQUIRED)
 
