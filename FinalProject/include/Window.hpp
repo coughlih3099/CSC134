@@ -1,19 +1,28 @@
-#pragma once
+/**
+ * @file Window.hpp
+ *
+ * @brief Window class header.
+ */
 
-// Wrapper class for Raylib window
+#pragma once
 
 #include <raylib.h>
 #include <string>
 #include <vector>
 
+ /**
+  * @class Window
+  *
+  * @brief Wrapper class for Raylib window.
+  */
 class Window {
  private:
     int size_current_width = 1280;
     int size_current_height = 720;
     int size_minimum_width = 100;
     int size_minimum_height = 100;
-    int size_maximum_width = 7680;  // 8K resolution
-    int size_maximum_height = 4320;  // 8K resolution
+    int size_maximum_width = 7680;  /**< 8K resolution */
+    int size_maximum_height = 4320;  /**< 8K resolution */
     ConfigFlags flags = static_cast<ConfigFlags>(0);
     bool is_test_mode = false;
     std::string title = "Raylib Window";
@@ -38,35 +47,46 @@ class Window {
 
 
     /**
-     *  searches through all available flags to see which are enabled
-     *  @return, a list of string representations of the enabled flags
+     * @brief Gets string representations of enabled flags.
+     *
+     *  Searches through all available flags to see which are enabled
+     *
+     *  @return A vector of string representations of the enabled flags
      */
     std::vector<std::string> get_enabled_flags();
 
 
     /**
+     * @brief Sets the window size.
+     *
      * Sets the window size to width by height. Fails if the width and height
      * are equal to the current width and height.
-     * @returns true if the window is a different size from the size it was when the
-     * function was called
+     *
+     * @return True if the internal storage variables got updated.
      */
     bool set_size_current(int width, int height);
 
     /**
+     * @brief Attempts to change minimum window size
+     *
      * (Default minimum is 100x100)
      * Tries to set the minimum size for a resizable window.
      * Fails if the resizable flag isn't set or if the width and height are
      * equal to the current minimum width and height.
-     * @returns true if minimum size changed else false
+     *
+     * @return true if minimum size changed else false
      */
     bool set_size_minimum(int width, int height);
 
     /**
+     * @brief Attempts to change maximum window size
+     *
      * (Default is 7680x4320, 8k resolution)
      * Tries to set the maximum size for a resizable window.
      * Fails if the resizable flag isn't set or if the width and height are
      * equal to the current maximum width and height
-     * @returns true if maximum size changed else false
+     *
+     * @return true if maximum size changed else false
      */
     bool set_size_maximum(int width, int height);
 };

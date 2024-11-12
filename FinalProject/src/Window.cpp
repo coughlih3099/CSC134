@@ -1,3 +1,9 @@
+/**
+ * @file Window.cpp
+ *
+ * @brief Implementation of the Window class.
+ */
+
 #include <raylib.h>
 #include <array>
 #include <string>
