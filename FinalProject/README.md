@@ -12,7 +12,12 @@ But I've been having too much fun building on top of Raylib to actually make a g
 - ./FinalProject
 
 ### Build the docs
-In your build folder:
+In your build directory:
 - cmake ..
 - make docs
 - firefox docs/html/index.html (assuming you're using firefox and the CLI)
+
+
+### Run the tests
+After building and while in the build directory:
+./test/FinalProject_test
