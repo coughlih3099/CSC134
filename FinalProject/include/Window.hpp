@@ -24,15 +24,15 @@ class Window {
     int size_maximum_width = 7680;  /**< 8K resolution */
     int size_maximum_height = 4320;  /**< 8K resolution */
     ConfigFlags flags = static_cast<ConfigFlags>(0);
-    bool is_test_mode = false;
+    bool is_test_mode;
     std::string title = "Raylib Window";
 
  public:
-    explicit Window(bool is_test_mode);
-    Window(int size_width, int size_height, std::string title,
-           bool is_test_mode);
+    explicit Window(bool is_test_mode = false);
+    Window(int size_width, int size_height, std::string initial_title,
+           bool is_test_mode = false);
     Window(int size_width, int size_height, ConfigFlags flags,
-           std::string title, bool is_test_mode);
+           std::string initial_title, bool is_test_mode = false);
     ~Window();
 
     int get_current_width()     const { return size_current_width; }

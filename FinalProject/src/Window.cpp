@@ -20,11 +20,11 @@ Window::Window(bool is_test_mode) :
     }
 }
 
-Window::Window(int size_current_width, int size_current_height, std::string title,
+Window::Window(int size_width, int size_height, std::string initial_title,
                bool is_test_mode) :
-    size_current_width(size_current_width),
-    size_current_height(size_current_height),
-    title(std::move(title)),
+    size_current_width(size_width),
+    size_current_height(size_height),
+    title(std::move(initial_title)),
     is_test_mode(is_test_mode)
 {
     if (!is_test_mode) {
@@ -32,12 +32,12 @@ Window::Window(int size_current_width, int size_current_height, std::string titl
     }
 }
 
-Window::Window(int size_current_width, int size_current_height, ConfigFlags flags,
-               std::string title, bool is_test_mode) :
-    size_current_width(size_current_width),
-    size_current_height(size_current_height),
+Window::Window(int size_width, int size_height, ConfigFlags flags,
+               std::string initial_title, bool is_test_mode) :
+    size_current_width(size_width),
+    size_current_height(size_height),
     flags(flags),
-    title(std::move(title)),
+    title(std::move(initial_title)),
     is_test_mode(is_test_mode)
 {
     if (!is_test_mode) {
