@@ -69,7 +69,7 @@ class Window {
     /**
      * @brief Attempts to change minimum window size
      *
-     * (Default minimum is 100x100)
+     * (Absolute minimum is 100x100)
      * Tries to set the minimum size for a resizable window.
      * Fails if the resizable flag isn't set or if the width and height are
      * equal to the current minimum width and height.
