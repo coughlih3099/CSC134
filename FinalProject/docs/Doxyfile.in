@@ -56,3 +56,11 @@ EXAMPLE_RECURSIVE       = YES
 # Layout
 LAYOUT_FILE             =
 TOC_INCLUDE_HEADINGS    = 5
+
+# Memory settings
+DOT_GRAPH_MAX_NODES  = 50
+
+# Filtering
+ENABLED_SECTIONS    = 
+EXCLUDE_SYMLINKS    = NO
+EXCLUDE_PAGES      = NO
