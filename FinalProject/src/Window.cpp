@@ -7,9 +7,6 @@
 
 
 Window::Window(bool is_test_mode) :
-    size_current_width(1280),
-    size_current_height(720),
-    flags(static_cast<ConfigFlags>(0)),
     title("Raylib Window"),
     is_test_mode(is_test_mode)
 {
@@ -22,7 +19,6 @@ Window::Window(int size_current_width, int size_current_height, std::string titl
                bool is_test_mode) :
     size_current_width(size_current_width),
     size_current_height(size_current_height),
-    flags(static_cast<ConfigFlags>(0)),
     title(std::move(title)),
     is_test_mode(is_test_mode)
 {
@@ -151,4 +147,97 @@ std::vector<std::string> Window::get_enabled_flags() {
     }
 
     return enabled_flags;
+}
+
+
+bool Window::set_size_current(int width, int height) {
+    if (width == get_current_width() && height == get_current_height()) {
+        TraceLog(LOG_WARNING, "Trying to set window size to it's current size");
+        return false;
+    }
+
+    if (width <= size_minimum_width || height <= size_minimum_height) {
+        TraceLog(LOG_WARNING, "Trying to set window size smaller than the "
+                              "minimum allowed: %d x %d",
+                              size_minimum_width, size_minimum_height);
+        return false;
+    }
+
+    if (width >= size_maximum_width || height >= size_maximum_height) {
+        TraceLog(LOG_WARNING, "Trying to set window size larger than the "
+                              "maximum allowed: %d x %d",
+                              size_maximum_width, size_maximum_height);
+        return false;
+    }
+
+    size_current_width = width;
+    size_current_height = height;
+
+    if (!is_test_mode) {
+        SetWindowSize(width, height);
+    }
+
+    return (width == get_current_width() && height == get_current_height());
+}
+
+
+bool Window::set_size_minimum(int width, int height) {
+    const int ABSOLUTE_MINIMUM = 100;
+
+    if (!(flags & FLAG_WINDOW_RESIZABLE)) {
+        TraceLog(LOG_WARNING, "The window is not resizable");
+        return false;
+    }
+
+    if (width < ABSOLUTE_MINIMUM || height < ABSOLUTE_MINIMUM) {
+        TraceLog(LOG_WARNING, "Trying to set minimum lower than the absolute "
+                              "minimum value of 100 x 100.");
+        return false;
+    }
+
+    if (width >= get_maximum_width() || height >= get_maximum_height()) {
+        TraceLog(LOG_WARNING, "Trying to set minimum higher than the "
+                              "maximum: %d x %d",
+                              size_maximum_width, size_maximum_height);
+        return false;
+    }
+
+    if (width == get_minimum_width() && height == get_minimum_height()) {
+        TraceLog(LOG_WARNING, "Trying to set minimum to it's current value");
+        return false;
+    }
+
+    size_minimum_width = width;
+    size_minimum_height = height;
+
+    return (width == get_minimum_width() && height == get_minimum_height());
+}
+
+
+bool Window::set_size_maximum(int width, int height) {
+    if (!(flags & FLAG_WINDOW_RESIZABLE)) {
+        TraceLog(LOG_WARNING, "The window is not resizable");
+        return false;
+    }
+
+    if (width <= get_minimum_width() || height <= get_minimum_height()) {
+        TraceLog(LOG_WARNING, "Tring to set maximum lower that the "
+                              "minimum: %d x %d",
+                              size_minimum_width, size_minimum_height);
+        return false;
+    }
+
+    if (width == get_maximum_width() && height == get_maximum_height()) {
+        TraceLog(LOG_WARNING, "Maximum size is equal to the current maximum");
+        return false;
+    }
+
+    size_maximum_width = width;
+    size_maximum_height = height;
+
+    if (!is_test_mode) {
+        SetWindowSize(width, height);
+    }
+
+    return (width == get_maximum_width() && height == get_maximum_height());
 }
