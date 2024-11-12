@@ -19,7 +19,7 @@ if(DOXYGEN_FOUND)
 
     # Copy Doxyfile.in to buid directory
     configure_file(
-        ${PROJECT_SOURCE_DIR}/doc/Doxyfile.in
+        ${PROJECT_SOURCE_DIR}/docs/Doxyfile.in
         ${PROJECT_BINARY_DIR}/Doxyfile @ONLY
     )
 
