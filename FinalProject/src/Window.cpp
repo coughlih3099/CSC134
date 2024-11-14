@@ -55,6 +55,11 @@ Window::~Window() {
 }
 
 
+bool Window::get_window_ready() {
+    return IsWindowReady();
+}
+
+
 const std::array<ConfigFlags, 16> all_flags = {
     // These flags can be set whenever
     FLAG_VSYNC_HINT,   // Set to try enabling V-Sync on GPU
