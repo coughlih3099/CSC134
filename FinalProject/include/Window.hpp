@@ -46,6 +46,13 @@ class Window {
     ConfigFlags get_flags()     const { return flags; }
 
     /**
+     * @brief Check if the window should keep running
+     *
+     * @return False if the window should stop running
+     */
+    bool should_keep_running();
+
+    /**
      * @brief Check if the window has been initialized successfully
      *
      * @return True if the window has been initialized
