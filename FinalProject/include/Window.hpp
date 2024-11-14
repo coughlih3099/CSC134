@@ -45,6 +45,66 @@ class Window {
     std::string get_title()     const { return title; }
     ConfigFlags get_flags()     const { return flags; }
 
+    /**
+     * @brief Check if the window should keep running
+     *
+     * @return False if the window should stop running
+     */
+    bool should_keep_running();
+
+    /**
+     * @brief Check if the window has been initialized successfully
+     *
+     * @return True if the window has been initialized
+     */
+    bool get_window_ready();
+
+    /**
+     * @brief Check if the window is in fullscreen mode
+     *
+     * TODO(coughlih3099): Test if borderless fullscreen counts as fullscreen
+     *
+     * @return True if the window is fullscreen
+     */
+    bool is_fullscreen();
+
+    /**
+     * @brief Check if the window is hidden
+     *
+     * @return True if the window is hidden
+     */
+    bool is_hidden();
+
+    /**
+     * @brief Check if the window is minimized
+     *
+     * @return True if the window is minimized
+     */
+    bool is_minimized();
+
+     /**
+      * @brief Check if the window is maximized
+      *
+      * @return True if the window is maximized
+      */
+    bool is_maximized();
+
+    /**
+     * @brief Check if the window is focused
+     *
+     * @return True if the window is focused
+     */
+    bool is_focused();
+
+    /**
+     * @brief Check if the window has been resized
+     *
+     * Checks if the window has been resized since the last frame
+     *
+     * @return True if the window has been resized
+     */
+    bool has_been_resized();
+
 
     /**
      * @brief Gets string representations of enabled flags.
@@ -62,6 +122,8 @@ class Window {
      * Sets the window size to width by height. Fails if the width and height
      * are equal to the current width and height.
      *
+     * @param width The width of the window in pixels.
+     * @param heigh The height of the window in pixels.
      * @return True if the internal storage variables got updated.
      */
     bool set_size_current(int width, int height);
@@ -74,6 +136,8 @@ class Window {
      * Fails if the resizable flag isn't set or if the width and height are
      * equal to the current minimum width and height.
      *
+     * @param width The minimum width of the window in pixels.
+     * @param heigh The minimum height of the window in pixels.
      * @return true if minimum size changed else false
      */
     bool set_size_minimum(int width, int height);
@@ -86,6 +150,8 @@ class Window {
      * Fails if the resizable flag isn't set or if the width and height are
      * equal to the current maximum width and height
      *
+     * @param width The maximum width of the window in pixels.
+     * @param heigh The maximum height of the window in pixels.
      * @return true if maximum size changed else false
      */
     bool set_size_maximum(int width, int height);
