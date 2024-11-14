@@ -59,9 +59,32 @@ bool Window::should_keep_running() {
     return !(WindowShouldClose());
 }
 
-
 bool Window::get_window_ready() {
     return IsWindowReady();
+}
+
+bool Window::is_fullscreen() {
+    return IsWindowFullscreen();
+}
+
+bool Window::is_hidden() {
+    return IsWindowHidden();
+}
+
+bool Window::is_minimized() {
+    return IsWindowMinimized();
+}
+
+bool Window::is_maximized() {
+    return IsWindowMaximized();
+}
+
+bool Window::is_focused() {
+    return IsWindowFocused();
+}
+
+bool Window::has_been_resized() {
+    return IsWindowResized();
 }
 
 

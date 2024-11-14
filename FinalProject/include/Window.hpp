@@ -59,6 +59,52 @@ class Window {
      */
     bool get_window_ready();
 
+    /**
+     * @brief Check if the window is in fullscreen mode
+     *
+     * TODO(coughlih3099): Test if borderless fullscreen counts as fullscreen
+     *
+     * @return True if the window is fullscreen
+     */
+    bool is_fullscreen();
+
+    /**
+     * @brief Check if the window is hidden
+     *
+     * @return True if the window is hidden
+     */
+    bool is_hidden();
+
+    /**
+     * @brief Check if the window is minimized
+     *
+     * @return True if the window is minimized
+     */
+    bool is_minimized();
+
+     /**
+      * @brief Check if the window is maximized
+      *
+      * @return True if the window is maximized
+      */
+    bool is_maximized();
+
+    /**
+     * @brief Check if the window is focused
+     *
+     * @return True if the window is focused
+     */
+    bool is_focused();
+
+    /**
+     * @brief Check if the window has been resized
+     *
+     * Checks if the window has been resized since the last frame
+     *
+     * @return True if the window has been resized
+     */
+    bool has_been_resized();
+
 
     /**
      * @brief Gets string representations of enabled flags.
