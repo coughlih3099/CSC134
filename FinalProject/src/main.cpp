@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "../include/main.hpp"
+#include "../include/Window.hpp"
 
 // ----
 
@@ -9,30 +10,27 @@
 int main() {
     // Init
     // ---
-    const int SCREEN_WIDTH = 1280;
-    const int SCREEN_HEIGHT = 720;
 
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Window");
-    SetTargetFPS(60);
+    Window window;
 
-    if (IsWindowReady()) {
-        game_launch();
-    } else {
-        TraceLog(LOG_FATAL, "Window was not initialized");
+    if (!window.is_ready()) {
         return 42069;
     }
+
+    SetTargetFPS(60);
+
     //---
 
     // Main Loop
-    while (!WindowShouldClose()) {
+    while (window.should_keep_running()) {
         // Update
         // -----
-        game_update();
+
         // Draw
         // ----
         BeginDrawing();
 
-        game_render();
+        ClearBackground(WHITE);
 
         EndDrawing();
     }
@@ -41,26 +39,5 @@ int main() {
     // -------
     game_unload();
 
-    CloseWindow();
     return 0;
-}
-
-
-// Initialize the game systems
-void game_launch() {
-}
-
-
-// Process the game logic
-void game_update() {
-}
-
-
-// Draw the current frame
-void game_render() {
-}
-
-
-// Clean up and shutdown
-void game_unload() {
 }
