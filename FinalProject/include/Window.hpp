@@ -57,7 +57,7 @@ class Window {
      *
      * @return True if the window has been initialized
      */
-    bool get_window_ready();
+    bool is_ready();
 
     /**
      * @brief Check if the window is in fullscreen mode

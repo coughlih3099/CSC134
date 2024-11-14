@@ -59,7 +59,7 @@ bool Window::should_keep_running() {
     return !(WindowShouldClose());
 }
 
-bool Window::get_window_ready() {
+bool Window::is_ready() {
     return IsWindowReady();
 }
 
