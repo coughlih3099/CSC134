@@ -37,7 +37,6 @@ int main() {
 
     // De-Init
     // -------
-    game_unload();
 
     return 0;
 }
