@@ -177,4 +177,14 @@ class Window {
      */
     bool remove_flags();
     bool remove_flags(ConfigFlags flags_to_remove);
+
+    /**
+     * @brief Toggles fullscreen for window.
+     */
+    void toggle_fullscreen();
+
+    /**
+     * @brief Toggles borderless windowed mode.
+     */
+    void toggle_borderless();
 };

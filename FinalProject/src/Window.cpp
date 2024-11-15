@@ -333,3 +333,11 @@ bool Window::remove_flags(ConfigFlags flags_to_remove) {
 
     return (flags & flags_to_remove) == 0;
 }
+
+void Window::toggle_fullscreen() {
+    ToggleFullscreen();
+}
+
+void Window::toggle_borderless() {
+    ToggleBorderlessWindowed();
+}
