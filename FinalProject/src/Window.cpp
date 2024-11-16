@@ -341,3 +341,27 @@ void Window::toggle_fullscreen() {
 void Window::toggle_borderless() {
     ToggleBorderlessWindowed();
 }
+
+void Window::show_cursor() {
+    ShowCursor();
+}
+
+void Window::hide_cursor() {
+    HideCursor();
+}
+
+bool Window::is_cursor_hidden() {
+    return IsCursorHidden();
+}
+
+void Window::enable_cursor() {
+    EnableCursor();
+}
+
+void Window::disable_cursor() {
+    DisableCursor();
+}
+
+bool Window::is_cursor_on_screen() {
+    return IsCursorOnScreen();
+}
