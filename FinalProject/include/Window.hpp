@@ -187,4 +187,38 @@ class Window {
      * @brief Toggles borderless windowed mode.
      */
     void toggle_borderless();
+
+    /**
+     * @brief Sets cursor visible within the window
+     */
+    void show_cursor();
+
+    /**
+     * @brief Sets cursor invisible within the window
+     */
+    void hide_cursor();
+
+    /**
+     * @brief Checks if the cursor is hidden
+     *
+     * @return True if the cursor is hidden
+     */
+    bool is_cursor_hidden();
+
+    /**
+     * @brief Enables the cursor
+     */
+    void enable_cursor();
+
+    /**
+     * @brief Disables the cursor
+     */
+    void disable_cursor();
+
+    /**
+     * @brief Checks if the cursor is in the window
+     *
+     * @return True if the cursor is within the window
+     */
+    bool is_cursor_on_screen();
 };
