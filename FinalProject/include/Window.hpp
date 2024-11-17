@@ -189,6 +189,21 @@ class Window {
     void toggle_borderless();
 
     /**
+     * @brief Minimizes window if resizable.
+     */
+    void minimize();
+
+    /**
+     * @brief Maximizes window if resizable.
+     */
+    void maximize();
+
+    /**
+     * @brief Restores window, not minimized/maximized.
+     */
+    void restore();
+
+    /**
      * @brief Sets cursor visible within the window
      */
     void show_cursor();

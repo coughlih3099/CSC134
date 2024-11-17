@@ -342,6 +342,18 @@ void Window::toggle_borderless() {
     ToggleBorderlessWindowed();
 }
 
+void Window::minimize() {
+    MinimizeWindow();
+}
+
+void Window::maximize() {
+    MaximizeWindow();
+}
+
+void Window::restore() {
+    RestoreWindow();
+}
+
 void Window::show_cursor() {
     ShowCursor();
 }
