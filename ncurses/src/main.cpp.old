@@ -1,0 +1,77 @@
+#include <ncurses.h>
+#include <cwchar>  // Wide character support in C++
+#include <locale>
+#include <string>
+#include <iostream>
+#include "../include/Entity.hpp"
+
+typedef struct Player {
+    Position position;
+    char appearance = '@';
+} Player;
+
+int main() {
+    std::locale locale = std::locale::global(std::locale(""));  // Use the user's default locale
+    std::setlocale(LC_ALL, "");  // NCurses compatibility for UTF-8
+
+    if (!locale.name().find("UTF-8")) {
+        /*
+        std::cerr << "Didn't find UTF-8 for some reason, here's what I found:"
+                  << locale.name() << std::endl;
+        */
+        return 69420;
+    }
+
+    // Initialize ncurses
+    initscr();
+    noecho();
+    cbreak();
+    curs_set(0);  // hide the cursor
+
+    // do colors
+    start_color();
+    if (!has_colors()) {
+        /*
+        std::cerr << "No clors" << std::endl;
+        */
+        return 42069;
+    }
+    Player player;
+    Player cursor;
+    player.position.y = 1;
+    player.position.x = 1;
+    refresh();
+
+    char ch;
+    bool keep_running = true;
+    mvaddch(player.position.y, player.position.x, player.appearance);
+    // game loop
+    while ((ch = getch()) != 'Q') {
+        switch (ch) {
+            case 'w':
+                player.position.y -= 1;
+                break;
+            case 's':
+                player.position.y += 1;
+                break;
+            case 'a':
+                player.position.x -= 1;
+                break;
+            case 'd':
+                player.position.x += 1;
+                break;
+        }
+        refresh();
+        mvaddch(player.position.y, player.position.x, player.appearance);
+        getyx(stdscr, cursor.position.y, cursor.position.x);
+        mvprintw(0, 20, "%d, %d", cursor.position.y, cursor.position.x);
+        mvprintw(1, 20, "%d, %d", player.position.y, player.position.x);
+    }
+
+
+
+
+    // end the stdscr
+    endwin();
+    return 0;
+}
