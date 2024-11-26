@@ -45,3 +45,7 @@ Window::Window(int height, int width, int start_y, int start_x) {
         throw std::runtime_error("Failed to create Window");
     }
 }
+
+void Window::set_delay(int delay_in_milliseconds) {
+    wtimeout(window.get(), delay_in_milliseconds);
+}

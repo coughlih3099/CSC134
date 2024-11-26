@@ -16,9 +16,22 @@ struct WindowDeleter {
 class Window {
  private:
     std::unique_ptr<WINDOW, WindowDeleter> window;
+    int delay;
 
  public:
     Window(int height, int width, int start_y, int start_x);
+
+    /**
+     * @brief Sets (non)blocking read for the window.
+     *
+     * If delay_in_milliseconds < 0, blocking read.
+     * If delay_in_milliseconds == 0, non-blocking read.
+     * If delay_in_milliseconds > 0, the read is blocked for set time.
+     * 
+     * @param delay_in_milliseconds The delay to block for in milliseconds
+     */
+    void set_delay(int delay_in_milliseconds);
+    int get_delay() { return delay; }
 
     // Get the raw pointer
     WINDOW* get_pointer() { return window.get(); }
