@@ -37,7 +37,7 @@ Window::Window(int height, int width, int start_y, int start_x) {
             }
             invalid_arguments += "start x";
         }
-        throw std::invalid_argument(invalid_arguments + ": invalid");
+        throw std::invalid_argument(invalid_arguments + ": can't be less than 0");
     }
     window = std::unique_ptr<WINDOW, WindowDeleter>(
             newwin(height, width, start_y, start_x));
