@@ -37,7 +37,7 @@ class Entity {
     Position previous_position;
     Position current_position;
     Position get_new_position(Direction direction);
-    wchar_t appearance;
+    wchar_t appearance = '@';
 
  public:
     Position get_position() { return current_position; }
