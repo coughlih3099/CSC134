@@ -1,5 +1,5 @@
 /**
- * @file Entity.hpp
+ * @file Character.hpp
  *
  * @brief Header file for Entities
  */
@@ -8,7 +8,7 @@
 #include <ncurses.h>
 
  /**
-  * @brief Struct for entity position
+  * @brief Struct for Character position
   *
   * Follows the NCurses style of y, x
   */
@@ -32,7 +32,7 @@ typedef enum Direction {
     SOUTH
 } direction;
 
-class Entity {
+class Character {
  private:
     Position previous_position;
     Position current_position;
@@ -42,4 +42,4 @@ class Entity {
  public:
     Position get_position() { return current_position; }
     void move_direction(Direction direction);
-};  // Entity
+};  // Character

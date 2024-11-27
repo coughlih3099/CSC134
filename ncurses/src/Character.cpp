@@ -1,13 +1,13 @@
 /**
- * @file Entity.cpp
+ * @file Character.cpp
  *
  * @brief Implementation of Entities class
  */
 #include <ncurses.h>
 
-#include "../include/Entity.hpp"
+#include "../include/Character.hpp"
 
-Position Entity::get_new_position(Direction direction) {
+Position Character::get_new_position(Direction direction) {
     Position new_position;
     switch (direction) {
         case NORTH:
@@ -25,7 +25,7 @@ Position Entity::get_new_position(Direction direction) {
     return new_position;
 }
 
-void Entity::move_direction(Direction direction) {
+void Character::move_direction(Direction direction) {
     previous_position = current_position;
     current_position = get_new_position(direction);
 }
