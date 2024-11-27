@@ -5,6 +5,7 @@
  */
 #pragma once
 
+#include <ncurses.h>
 
  /**
   * @brief Struct for entity position
@@ -22,3 +23,23 @@ typedef struct Position {
         return { y - other.y, x - other.x };
     }
 } Position;
+
+// I'm not sold on having this in here
+typedef enum Direction {
+    NORTH,
+    EAST,
+    WEST,
+    SOUTH
+} direction;
+
+class Entity {
+ private:
+    Position previous_position;
+    Position current_position;
+    Position get_new_position(Direction direction);
+    wchar_t appearance;
+
+ public:
+    Position get_position() { return current_position; }
+    void move_direction(Direction direction);
+};  // Entity
