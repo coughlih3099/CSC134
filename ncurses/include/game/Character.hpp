@@ -23,6 +23,8 @@ class Character {
     /**
      * @brief Constructor for a Character
      *
+     * @param character_handle Number associated with the character for
+     *        identification purposes
      * @param starting_position The starting position for the character
      * @param map_reference Reference to the Map
      * @param starting_appearance UTF-8 character representation
