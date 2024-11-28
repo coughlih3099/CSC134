@@ -14,6 +14,7 @@ typedef struct Cell {
         Floor,
         Wall
     } Type;
+    Type type;
 } Cell;
 
 class Map {
