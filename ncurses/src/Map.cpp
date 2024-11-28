@@ -25,11 +25,11 @@ Map::Map(int height, int width) :
     }
 }
 
-bool Map::is_in_bounds(Position position) {
+bool Map::is_in_bounds(Position position) const {
     return position.y >= 0 && position.y < grid_height &&
            position.x >= 0 && position.x < grid_width;
 }
 
-const Cell& Map::get_cell(Position position) {
+const Cell& Map::get_cell(Position position) const {
     return grid[position.y][position.x];
 }

@@ -67,10 +67,10 @@ class Map {
     /**
      * @brief Checks to see if a position is within bounds of the map
      */
-    bool is_in_bounds(Position position);
+    bool is_in_bounds(Position position) const;
 
     /**
      * @brief Returns a reference to the cell at the given position
      */
-    const Cell& get_cell(Position position);
+    const Cell& get_cell(Position position) const;
 };  // Map
