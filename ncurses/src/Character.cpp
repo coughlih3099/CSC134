@@ -29,7 +29,7 @@ Character::Character(int character_handle, Position starting_position,
     if (!movement_type->can_traverse(map.get_cell(starting_position))) {
         error += "Character " + std::to_string(handle) + "s movement type:";
         error += movement_type->to_string() + " can't traverse ";
-        error += map.get_cell(starting_position).type_to_string();
+        error += map.get_cell_type(starting_position);
         throw std::invalid_argument(error);
     }
 }
