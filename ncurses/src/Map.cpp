@@ -21,7 +21,7 @@ Map::Map(int height, int width) :
             }
             error += "width";
         }
-        throw std::invalid_argument(error + ": can't be less than 0");
+        throw std::invalid_argument("Map " + error + ": can't be less than 0");
     }
 }
 
