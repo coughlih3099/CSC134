@@ -49,6 +49,9 @@ class Map {
     std::vector<std::vector<Cell>> grid;
 
  public:
+    /**
+     * @brief Constructor can throw
+     */
     Map(int height, int width);
 
     /**
