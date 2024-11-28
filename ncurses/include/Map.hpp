@@ -6,6 +6,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
  /**
   * @brief Struct for Character position
@@ -73,4 +74,6 @@ class Map {
      * @brief Returns a reference to the cell at the given position
      */
     const Cell& get_cell(Position position) const;
+
+    const std::string get_cell_type(Position position) const;
 };  // Map

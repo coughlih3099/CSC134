@@ -3,6 +3,7 @@
  *
  * @brief Implementation of the Map class
  */
+#include <exception>
 #include <string>
 #include <stdexcept>
 #include "../include/Map.hpp"
@@ -32,4 +33,21 @@ bool Map::is_in_bounds(Position position) const {
 
 const Cell& Map::get_cell(Position position) const {
     return grid[position.y][position.x];
+}
+
+const std::string Map::get_cell_type(Position position) const {
+    Cell cell = grid[position.y][position.x];
+    std::string result;
+    switch (cell.type) {
+        case Cell::Floor:
+            result = "floor";
+            break;
+        case Cell::Wall:
+            result = "wall";
+            break;
+        default:
+            result = "Why doesn't this have a type?";
+            break;
+    }
+    return result;
 }
