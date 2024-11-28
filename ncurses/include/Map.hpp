@@ -24,6 +24,16 @@ typedef struct Position {
     }
 } Position;
 
+/**
+ * @brief Enum for cardinal directions
+ */
+enum class Direction {
+    NORTH,
+    EAST,
+    WEST,
+    SOUTH
+};
+
 
 /**
  * @brief Struct for the cells that make up the map
