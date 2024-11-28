@@ -13,7 +13,7 @@
 #include "../../include/game/Character.hpp"
 
 Character::Character(int character_handle, Position starting_position,
-                     const Map& map_reference, wchar_t starting_appearance,
+                     const Map& map_reference, char32_t starting_appearance,
                      std::unique_ptr<Movement> move_type) :
     handle(character_handle),
     previous_position(starting_position),

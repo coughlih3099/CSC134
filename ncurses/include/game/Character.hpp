@@ -15,7 +15,7 @@ class Character {
     int handle;
     Position previous_position;
     Position current_position;
-    wchar_t appearance;
+    char32_t appearance;
     std::unique_ptr<Movement> movement_type;
     const Map& map;
 
@@ -31,7 +31,7 @@ class Character {
      * @param move_type A unique pointer to the movement type for the character
      */
     Character(int character_handle, Position starting_position,
-              const Map& map_reference, wchar_t starting_appearance,
+              const Map& map_reference, char32_t starting_appearance,
               std::unique_ptr<Movement> move_type);
 
     Position get_current_position() const { return current_position; }
