@@ -6,6 +6,9 @@
 #include <ncurses.h>
 #include <memory>
 
+#define BLOCKING_INPUT -1
+#define NONBLOCKING_INPUT 0
+
 struct WindowDeleter {
     void operator()(WINDOW* window) {
         // checking window exists before deletion
