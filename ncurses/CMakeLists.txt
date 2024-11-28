@@ -44,13 +44,18 @@ find_package(Curses REQUIRED)
 # Add source files
 set(SOURCES
     src/main.cpp
-    src/NCursesSession.cpp
-    src/Window.cpp
+    src/core/NCursesSession.cpp
+    src/core/Window.cpp
+    src/game/Character.cpp
+    src/game/Map.cpp
+    src/game/MovementTypes.cpp
 )
 
 # Add include directories
 include_directories(
-    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/include/core
+    ${PROJECT_SOURCE_DIR}/include/game
+    ${PROJECT_SOURCE_DIR}/include/utils
     ${CURSES_INCLUDE_DIRS}
 )
 
