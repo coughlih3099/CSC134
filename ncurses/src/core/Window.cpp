@@ -7,7 +7,7 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
-#include "../include/Window.hpp"
+#include "../../include/core/Window.hpp"
 
 
 Window::Window(int height, int width, int start_y, int start_x) {

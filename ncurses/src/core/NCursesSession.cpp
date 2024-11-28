@@ -4,10 +4,10 @@
  * @brief Implementation of NCursesSession.hpp
  */
 
-#include "../include/NCursesSession.hpp"
 #include <ncurses.h>
 #include <locale>
 #include <string>
+#include "../../include/core/NCursesSession.hpp"
 
  /**
   * @brief Checks for POSIX compliant codeset of UTF-8

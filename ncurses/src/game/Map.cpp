@@ -4,13 +4,15 @@
  * @brief Implementation of the Map class
  */
 #include <exception>
+#include <vector>
 #include <string>
 #include <stdexcept>
-#include "../include/Map.hpp"
+#include "../../include/game/Map.hpp"
 
 Map::Map(int height, int width) :
     grid_height(height),
-    grid_width(width) {
+    grid_width(width),
+    grid(height, std::vector<Cell>(width, {Cell::Floor})) {
     if (grid_height < 0 || grid_width < 0) {
         std::string error = "";
         if (grid_height < 0) {

@@ -4,7 +4,7 @@
  * @brief Concrete implementations of Movement
  */
 #include <string>
-#include "../include/MovementTypes.hpp"
+#include "../../include/game/MovementTypes.hpp"
 
 bool Walking::can_traverse(const Cell& cell) const {
     return cell.type == Cell::Floor;
