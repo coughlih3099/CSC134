@@ -9,19 +9,18 @@
 #include <vector>
 #include <string>
 
+typedef struct Cell {
+    typedef enum Type {
+        Floor,
+        Wall
+    } Type;
+} Cell;
+
 class Map {
  private:
-    typedef struct Tile {
-        enum Type {
-            FLOOR,
-            WALL
-        } Type;
-        bool traversable;  // Able to be crossed
-        bool occupied;  // Whether or not another entity is in the tile
-    } Tile;
     int grid_height;
     int grid_width;
-    std::vector<std::vector<Tile>> grid;
+    std::vector<std::vector<Cell>> grid;
 
  public:
     Map(int height, int width) :
