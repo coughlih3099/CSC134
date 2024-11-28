@@ -5,10 +5,29 @@
  */
 #pragma once
 
-#include <stdexcept>
 #include <vector>
-#include <string>
 
+ /**
+  * @brief Struct for Character position
+  *
+  * Follows the NCurses style of y, x
+  */
+typedef struct Position {
+    int y, x;
+    // returns whether x1 == x2 && y1 == y2
+    bool operator==(const Position& other) const {
+        return y == other.y && x == other.x;
+    }
+    // returns y1 - y2, x1 - x2
+    Position operator-(const Position& other) const {
+        return { y - other.y, x - other.x };
+    }
+} Position;
+
+
+/**
+ * @brief Struct for the cells that make up the map
+ */
 typedef struct Cell {
     typedef enum Type {
         Floor,
@@ -17,6 +36,12 @@ typedef struct Cell {
     Type type;
 } Cell;
 
+
+/**
+ * @class Map
+ *
+ * @brief Holds information related to the map
+ */
 class Map {
  private:
     int grid_height;
@@ -24,21 +49,15 @@ class Map {
     std::vector<std::vector<Cell>> grid;
 
  public:
-    Map(int height, int width) :
-    grid_height(height),
-    grid_width(width) {
-        if (grid_height < 0 || grid_width < 0) {
-            std::string error = "";
-            if (grid_height < 0) {
-                error += "height";
-            }
-            if (grid_width < 0) {
-                if (!error.empty()) {
-                    error += ", ";
-                }
-                error += "width";
-            }
-            throw std::invalid_argument(error + ": can't be less than 0");
-        }
-    }
+    Map(int height, int width);
+
+    /**
+     * @brief Checks to see if a position is within bounds of the map
+     */
+    bool is_in_bounds(Position position);
+
+    /**
+     * @brief Returns a reference to the cell at the given position
+     */
+    const Cell& get_cell(Position position);
 };  // Map
