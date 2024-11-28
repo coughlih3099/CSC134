@@ -3,6 +3,8 @@
  *
  * @brief Header file for Window wrapper class
  */
+#pragma once
+
 #include <ncurses.h>
 #include <memory>
 
