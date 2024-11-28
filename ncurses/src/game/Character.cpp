@@ -9,8 +9,8 @@
 #include <stdexcept>
 #include <utility>
 
-#include "../include/Map.hpp"
-#include "../include/Character.hpp"
+#include "../../include/game/Map.hpp"
+#include "../../include/game/Character.hpp"
 
 Character::Character(int character_handle, Position starting_position,
                      const Map& map_reference, wchar_t starting_appearance,
