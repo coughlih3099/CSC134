@@ -36,6 +36,7 @@ struct WindowDeleter {
 class Window {
  private:
     int delay;
+    int height, width;
     std::unique_ptr<WINDOW, WindowDeleter> window;
     Window* parent;
     std::forward_list<Window> subwindows;
@@ -60,6 +61,8 @@ class Window {
      */
     void set_delay(int delay_in_milliseconds);
     int get_delay() { return delay; }
+    const int get_height() const { return height; }
+    const int get_width() const { return width; }
 
     /**
      * @brief Returns a reference to the created derived window

@@ -14,6 +14,8 @@
 Window::Window(int height, int width, int start_y, int start_x) :
     delay(BLOCKING_INPUT),
     parent(nullptr),
+    height(height),
+    width(width),
     relative_y(start_y),
     relative_x(start_x) {
     // According to NCurses man page, newwin will fail when any of arguments
@@ -54,6 +56,8 @@ Window::Window(int height, int width, int start_y, int start_x) :
 Window::Window(Window* parent, int height, int width, int relative_y, int relative_x) :
     delay(BLOCKING_INPUT),
     parent(parent),
+    height(height),
+    width(width),
     relative_y(relative_y),
     relative_x(relative_x) {
     if (!parent) {
