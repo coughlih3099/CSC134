@@ -1,10 +1,8 @@
-#include "../include/cellularautomaton.hpp"
-
 #include <iostream>
 #include <random>
 #include <vector>
 #include <cassert>
-#include "../include/getinputcpp.hpp"
+#include "../../include/procgen/cellularautomaton.hpp"
 
 namespace CellularAutomaton {
 
