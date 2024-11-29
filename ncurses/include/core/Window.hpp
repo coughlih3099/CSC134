@@ -41,12 +41,12 @@ class Window {
     std::forward_list<Window> subwindows;
     int relative_y, relative_x;
 
-    // Constructor for derived windows
-    Window(Window* parent, int height, int width, int start_y, int start_x);
 
  public:
     // Constructor for root windows
     Window(int height, int width, int start_y, int start_x);
+    // Constructor for derived windows
+    Window(Window* parent, int height, int width, int start_y, int start_x);
 
     /**
      * @brief Sets (non)blocking read for the window.
