@@ -7,10 +7,15 @@
 #include <memory>
 #include <stdexcept>
 #include <string>
+#include <forward_list>
 #include "../../include/core/Window.hpp"
 
 
-Window::Window(int height, int width, int start_y, int start_x) {
+Window::Window(int height, int width, int start_y, int start_x) :
+    delay(BLOCKING_INPUT),
+    parent(nullptr),
+    relative_y(start_y),
+    relative_x(start_x) {
     // According to NCurses man page, newwin will fail when any of arguments
     // passed to it are negative.
     // I wonder if there is a more graceful way to accomplish this.
@@ -46,6 +51,27 @@ Window::Window(int height, int width, int start_y, int start_x) {
     }
 }
 
+Window::Window(Window* parent, int height, int width, int relative_y, int relative_x) :
+    delay(BLOCKING_INPUT),
+    parent(parent),
+    relative_y(relative_y),
+    relative_x(relative_x) {
+    if (!parent) {
+        throw std::invalid_argument("Parent window cannot be nullptr for derived windows");
+    }
+    window = std::unique_ptr<WINDOW, WindowDeleter>(derwin(parent->get_pointer(),
+                                                    height, width, relative_y,
+                                                    relative_x));
+    if (!window) {
+        throw std::runtime_error("Failed to create derived window");
+    }
+}
+
 void Window::set_delay(int delay_in_milliseconds) {
+    delay = delay_in_milliseconds;
     wtimeout(window.get(), delay_in_milliseconds);
+}
+
+Window& Window::create_derived_window(int height, int width, int relative_y, int relative_x) {
+    return this->subwindows.emplace_front(this, height, width, relative_y, relative_x);
 }

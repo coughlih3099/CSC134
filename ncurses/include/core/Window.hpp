@@ -7,6 +7,7 @@
 
 #include <ncurses.h>
 #include <memory>
+#include <forward_list>
 
 #define BLOCKING_INPUT -1
 #define NONBLOCKING_INPUT 0
@@ -18,17 +19,39 @@ struct WindowDeleter {
     }
 };
 
+/**
+ * @class Window
+ *
+ * @brief Wrapper class for NCurses Windows
+ *
+ * This is a RAII implementation of NCurses Windows that seeks to simplify the
+ * usage of Windows and implement some memory safety features that are available
+ * in more modern C++.
+ * The window is essentially created with a Singleton pattern provided by the
+ * use of unique pointers and contains a non-default destructor.
+ * The Window class allows the creation of derived windows that must be accessed
+ * by reference as they are owned by the parent window and thus their lifetimes
+ * are tied to and managed by the parent window.
+ */
 class Window {
  private:
-    std::unique_ptr<WINDOW, WindowDeleter> window;
     int delay;
+    std::unique_ptr<WINDOW, WindowDeleter> window;
+    Window* parent;
+    std::forward_list<Window> subwindows;
+    int relative_y, relative_x;
+
+    // Constructor for derived windows
+    Window(Window* parent, int height, int width, int start_y, int start_x);
 
  public:
+    // Constructor for root windows
     Window(int height, int width, int start_y, int start_x);
 
     /**
      * @brief Sets (non)blocking read for the window.
      *
+     * Two macros are provided, BLOCKING_INPUT and NONBLOCKING_INPUT
      * If delay_in_milliseconds < 0, blocking read.
      * If delay_in_milliseconds == 0, non-blocking read.
      * If delay_in_milliseconds > 0, the read is blocked for set time.
@@ -37,6 +60,11 @@ class Window {
      */
     void set_delay(int delay_in_milliseconds);
     int get_delay() { return delay; }
+
+    /**
+     * @brief Returns a reference to the created derived window
+     */
+    Window& create_derived_window(int height, int width, int relative_y, int relative_x);
 
     // Get the raw pointer
     WINDOW* get_pointer() { return window.get(); }
