@@ -13,10 +13,9 @@
 #include "../include/core/Window.hpp"
 #include "../include/game/Map.hpp"
 #include "../include/game/Character.hpp"
-#include "../include/game/Movement.hpp"
 #include "../include/game/MovementTypes.hpp"
 #include "../include/utils/FrameTimer.hpp"
-
+#include "../include/procgen/cellularautomaton.hpp"
 
 int main() {
     // Create a frametimer with a target fps of 60
@@ -38,8 +37,9 @@ int main() {
         const Map map(session.get_terminal_height(), session.get_terminal_width());
 
         // Doesn't respond to terminal resizes
-        Window game_window(session.get_terminal_height(),
+        Window root_window(session.get_terminal_height(),
                            session.get_terminal_width(), 0, 0);
+        Window& game_window(root_window.create_derived_window(50, 50, 10, 10));
         // Set game window to blocking input
         game_window.set_delay(BLOCKING_INPUT);
 
@@ -64,7 +64,7 @@ int main() {
                         }
                     break;
                 case 's':
-                    if (current_position.y < session.get_terminal_height() - 2) {
+                    if (current_position.y < game_window.get_height() - 2) {
                         player.update_positions(
                                 { current_position.y + 1, current_position.x});
                         }
@@ -76,7 +76,7 @@ int main() {
                         }
                     break;
                 case 'd':
-                    if (current_position.x < session.get_terminal_width() - 2) {
+                    if (current_position.x < game_window.get_width() - 2) {
                         player.update_positions(
                                 { current_position.y, current_position.x + 1});
                         }
