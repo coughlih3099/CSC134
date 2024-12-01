@@ -59,12 +59,12 @@ void menu() {
  */
 int get_int(int start, int end) {
     int return_value = 0;
-    cout << "Enter an int within range" << start << "-" << end << ": ";
+    cout << "Enter an int within range " << start << "-" << end << ": ";
     cin >> return_value;
     while (cin.fail() || return_value < start || return_value > end) {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max());
-        cout << "Enter an int within range" << start << "-" << end << ": ";
+        cout << "Enter an int within range " << start << "-" << end << ": ";
         cin >> return_value;
     }
     return return_value;
