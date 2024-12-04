@@ -77,6 +77,13 @@ void Window::set_delay(int delay_in_milliseconds) {
     wtimeout(window.get(), delay_in_milliseconds);
 }
 
+void Window::move_cursor(int y, int x) {
+    if (y < 0 || y > this->height || x < 0 || x > this->width) {
+        throw std::invalid_argument("Cursor position out of bounds");
+    }
+    wmove(this->get_pointer(), y, x);
+}
+
 Window& Window::create_derived_window(int height, int width, int relative_y, int relative_x) {
     Window derived_window(this, height, width, relative_y, relative_x);
     subwindows.push_front(std::move(derived_window));

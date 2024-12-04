@@ -58,9 +58,21 @@ class Window {
      * @param delay_in_milliseconds The delay to block for in milliseconds
      */
     void set_delay(int delay_in_milliseconds);
-    int get_delay() { return delay; }
-    const int get_height() const { return height; }
-    const int get_width() const { return width; }
+    int get_delay() const { return delay; }
+    int get_height() const { return height; }
+    int get_width() const { return width; }
+
+    /**
+     * @brief Moves the cursor to the specified position.
+     *
+     * This function moves the cursor to the specified position within the
+     * window. If the position is outside the bounds of the window, it will fail.
+     *
+     * @param y Y position to move the cursor to.
+     * @param x X position to move the cursor to.
+     * @throws std::invalid_argument if position is outside the bounds of the window.
+     */
+    void move_cursor(int y, int x);
 
     /**
      * @brief Returns a reference to the created derived window.
