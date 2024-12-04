@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <string>
 #include <forward_list>
+#include <utility>
 #include "../../include/core/Window.hpp"
 
 
@@ -44,7 +45,8 @@ Window::Window(int height, int width, int start_y, int start_x) :
             }
             invalid_arguments += "start x";
         }
-        throw std::invalid_argument(invalid_arguments + ": can't be less than 0");
+        throw std::invalid_argument(std::move(invalid_arguments) +
+                                    ": can't be less than 0");
     }
     window = std::unique_ptr<WINDOW, WindowDeleter>(
             newwin(height, width, start_y, start_x));
@@ -64,8 +66,7 @@ Window::Window(Window* parent, int height, int width, int relative_y, int relati
         throw std::invalid_argument("Parent window cannot be nullptr for derived windows");
     }
     window = std::unique_ptr<WINDOW, WindowDeleter>(derwin(parent->get_pointer(),
-                                                    height, width, relative_y,
-                                                    relative_x));
+                                                    height, width, relative_y, relative_x));
     if (!window) {
         throw std::runtime_error("Failed to create derived window");
     }
@@ -77,5 +78,7 @@ void Window::set_delay(int delay_in_milliseconds) {
 }
 
 Window& Window::create_derived_window(int height, int width, int relative_y, int relative_x) {
-    return this->subwindows.emplace_front(this, height, width, relative_y, relative_x);
+    Window derived_window(this, height, width, relative_y, relative_x);
+    subwindows.push_front(std::move(derived_window));
+    return subwindows.front();
 }

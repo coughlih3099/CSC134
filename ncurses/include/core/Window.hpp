@@ -14,7 +14,6 @@
 
 struct WindowDeleter {
     void operator()(WINDOW* window) {
-        // checking window exists before deletion
         if (window) delwin(window);
     }
 };
@@ -41,13 +40,12 @@ class Window {
     Window* parent;
     std::forward_list<Window> subwindows;
     int relative_y, relative_x;
-
+    // Constructor for derived windows
+    Window(Window* parent, int height, int width, int start_y, int start_x);
 
  public:
     // Constructor for root windows
     Window(int height, int width, int start_y, int start_x);
-    // Constructor for derived windows
-    Window(Window* parent, int height, int width, int start_y, int start_x);
 
     /**
      * @brief Sets (non)blocking read for the window.
@@ -65,7 +63,17 @@ class Window {
     const int get_width() const { return width; }
 
     /**
-     * @brief Returns a reference to the created derived window
+     * @brief Returns a reference to the created derived window.
+     *
+     * This method ensures derived windows are properly created and managed by
+     * the parent.
+     * The relative y/x relates to the top-left corner of the derived window.
+     *
+     * @param height Height of the derived window.
+     * @param width Width of the derived window.
+     * @param relative_y Y position relative to the parent window.
+     * @param relative_x X position relative to the parent window.
+     * @return Reference to the newly created derived window.
      */
     Window& create_derived_window(int height, int width, int relative_y, int relative_x);
 
