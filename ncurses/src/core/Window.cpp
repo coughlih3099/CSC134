@@ -84,6 +84,13 @@ void Window::move_cursor(int y, int x) {
     wmove(this->get_pointer(), y, x);
 }
 
+void Window::add_char(chtype character) {
+    auto val = waddch(this->get_pointer(), character);
+    if (val == ERR) {
+        throw std::runtime_error("Not possible to add complete character to window.");
+    }
+}
+
 Window& Window::create_derived_window(int height, int width, int relative_y, int relative_x) {
     Window derived_window(this, height, width, relative_y, relative_x);
     subwindows.push_front(std::move(derived_window));
