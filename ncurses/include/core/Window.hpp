@@ -89,6 +89,32 @@ class Window {
     void add_char(chtype character);
 
     /**
+     * @brief Moves the cursor to position y, x; puts a character at the position of the
+     * cursor and then moves the cursor forward
+     * 
+     * If this function is called at the right margin of the window, the cursor
+     * will wrap to the next line.
+     * Any tab, backspace, or newline will appropriately move the cursor.
+     * Will require a refresh to show the character.
+     * 
+     * @param character Character to be put to the window
+     * @param y Y position of the cursor
+     * @param x X position of the cursor
+     * @throws std::runtime_error if the character won't fit onto the screen
+     * @throws std::invalid_argument if the y, x position is out of window bounds
+     */
+    void move_add_char(chtype character, int y, int x);
+
+    /**
+     * @brief Puts a character at the position of the cursor, moves the cursor forward, then
+     * refreshes the window
+     * 
+     * @param character Character to be put to the window
+     * @throws std::runtime_error if the character won't fit onto the screen
+     */
+    void echo_char(chtype character);
+
+    /**
      * @brief Returns a reference to the created derived window.
      *
      * This method ensures derived windows are properly created and managed by

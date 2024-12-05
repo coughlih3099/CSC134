@@ -91,6 +91,28 @@ void Window::add_char(chtype character) {
     }
 }
 
+void Window::move_add_char(chtype character, int y, int x) {
+    if (y < 0 || y > this->height || x < 0 || x > this->width) {
+        std::string error_message = "Cursor position out of window bounds; Position: ";
+        error_message += y;
+        error_message += ", ";
+        error_message += x;
+        throw std::invalid_argument(error_message);
+    }
+    auto val = mvwaddch(this->get_pointer(), y, x, character);
+    if (val == ERR) {
+        throw std::runtime_error("Not possible to add complete character to window.");
+    }
+}
+
+void Window::echo_char(chtype character) {
+    auto val = waddch(this->get_pointer(), character);
+    if (val == ERR) {
+        throw std::runtime_error("Not possible to add complete character to window.");
+    }
+    auto val = wrefresh(this->get_pointer());
+}
+
 Window& Window::create_derived_window(int height, int width, int relative_y, int relative_x) {
     Window derived_window(this, height, width, relative_y, relative_x);
     subwindows.push_front(std::move(derived_window));
