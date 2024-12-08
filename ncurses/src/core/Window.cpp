@@ -4,12 +4,14 @@
  * @brief Implementation of Window wrapper for NCurses
  */
 #include <ncurses.h>
+#include <forward_list>
 #include <memory>
 #include <stdexcept>
 #include <string>
-#include <forward_list>
 #include <utility>
+#include <vector>
 #include "../../include/core/Window.hpp"
+#include "../../include/utils/util.hpp"
 
 
 Window::Window(int height, int width, int start_y, int start_x) :
@@ -91,7 +93,7 @@ void Window::add_char(chtype character) {
     }
 }
 
-void Window::move_add_char(chtype character, int y, int x) {
+void Window::add_char_at(chtype character, int y, int x) {
     if (y < 0 || y > this->height || x < 0 || x > this->width) {
         std::string error_message = "Cursor position out of window bounds; Position: ";
         error_message += y;
@@ -106,11 +108,26 @@ void Window::move_add_char(chtype character, int y, int x) {
 }
 
 void Window::echo_char(chtype character) {
-    auto val = waddch(this->get_pointer(), character);
+    auto val = wechochar(this->get_pointer(), character);
     if (val == ERR) {
         throw std::runtime_error("Not possible to add complete character to window.");
     }
-    auto val = wrefresh(this->get_pointer());
+}
+
+void Window::add_char_str(std::string string, int number_characters) {
+    std::vector<chtype> chtype_string = string_to_chtype(string);
+    auto val = waddchnstr(this->get_pointer(), chtype_string.data(), number_characters);
+    if (val == ERR) {
+        throw std::runtime_error("String is nullptr");
+    }
+}
+
+void Window::add_char_str_at(std::string string, int y, int x, int number_characters) {
+    std::vector<chtype> chtype_string = string_to_chtype(string);
+    auto val = mvwaddchnstr(this->get_pointer(), y, x, chtype_string.data(), number_characters);
+    if (val == ERR) {
+        throw std::runtime_error("String is nullptr");
+    }
 }
 
 Window& Window::create_derived_window(int height, int width, int relative_y, int relative_x) {

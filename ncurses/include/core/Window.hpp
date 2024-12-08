@@ -6,8 +6,10 @@
 #pragma once
 
 #include <ncurses.h>
-#include <memory>
+#include <string>
 #include <forward_list>
+#include <memory>
+#include <vector>
 
 #define BLOCKING_INPUT -1
 #define NONBLOCKING_INPUT 0
@@ -17,6 +19,7 @@ struct WindowDeleter {
         if (window) delwin(window);
     }
 };
+
 
 /**
  * @class Window
@@ -89,8 +92,9 @@ class Window {
     void add_char(chtype character);
 
     /**
-     * @brief Moves the cursor to position y, x; puts a character at the position of the
-     * cursor and then moves the cursor forward
+     * @brief Moves the cursor to position y, x; 
+     * puts a character at the position of the cursor and then moves the
+     * cursor forward
      * 
      * If this function is called at the right margin of the window, the cursor
      * will wrap to the next line.
@@ -103,16 +107,61 @@ class Window {
      * @throws std::runtime_error if the character won't fit onto the screen
      * @throws std::invalid_argument if the y, x position is out of window bounds
      */
-    void move_add_char(chtype character, int y, int x);
+    void add_char_at(chtype character, int y, int x);
 
     /**
-     * @brief Puts a character at the position of the cursor, moves the cursor forward, then
-     * refreshes the window
+     * @brief Puts a character at the position of the cursor, moves the cursor
+     * forward, then refreshes the window
      * 
      * @param character Character to be put to the window
      * @throws std::runtime_error if the character won't fit onto the screen
      */
     void echo_char(chtype character);
+
+    /**
+     * @brief Copy a null-terminated character array into the window structure
+     * starting at the current cursor position.
+     *
+     * If number_characters = -1, the whole character array will be copied up to
+     * the max number of characters that fit into the current line, otherwise,
+     * it will copy at most number_characters elements.
+     *
+     * This function does not advance the cursor and is faster than add_str
+     * function, however:
+     * - does not perform checking (such as for newline, backspace,
+     *                              carriage return).
+     * - does not expand other control character to ^-escapes.
+     * - truncate the string if it crosses the right margin insteac of wrapping.
+     *
+     * @param string String to put to screen
+     * @param number_characters The number of characters to print
+     * @throws std::runtime_error if the string argument is nullptr
+     */
+    void add_char_str(const std::string& string, int number_characters = -1);
+
+    /**
+     * @brief Moves the cursor, then copies a null-terminated character array
+     * into the window structure starting at the current cursor position.
+     *
+     * If number_characters = -1, the whole character array will be copied up to
+     * the max number of characters that fit into the current line, otherwise,
+     * it will copy at most number_characters elements.
+     *
+     * This function does not advance the cursor and is faster than add_str
+     * function, however:
+     * - does not perform checking (such as for newline, backspace,
+     *                              carriage return).
+     * - does not expand other control character to ^-escapes.
+     * - truncate the string if it crosses the right margin insteac of wrapping.
+     *
+     * @param string String to put to screen
+     * @param number_characters The number of characters to print
+     * @param y Y position of the cursor
+     * @param x X position of the cursor
+     * @throws std::runtime_error if the string argument is nullptr
+     * @throws std::invalid_argument if the y, x position is out of window bounds
+     */
+    void add_char_str_at(const std::string& string, int y, int x, int number_characters = -1);
 
     /**
      * @brief Returns a reference to the created derived window.
@@ -141,3 +190,5 @@ class Window {
     Window(Window&&) = default;
     Window& operator=(Window&&) = default;
 };  // Window
+
+
