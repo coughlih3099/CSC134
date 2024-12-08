@@ -1,9 +1,10 @@
 // CSC 134
-// M7T2 - Bronze
+// M7T2 - Silver
 // Harley Coughlin
 // 12/08/2024
 
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ class Rectangle {
     double getArea() const;
 };
 
+double get_double();
 
 int main() {
     Rectangle box;
@@ -28,9 +30,9 @@ int main() {
 
     cout << "This program will calculate the area of a\n";
     cout << "rectangle. What is the width? ";
-    cin >> rectWidth;
+    rectWidth = get_double();
     cout << "What is the length? ";
-    cin >> rectLength;
+    rectLength = get_double();
 
     box.setWidth(rectWidth);
     box.setLength(rectLength);
@@ -41,6 +43,18 @@ int main() {
     cout << "Area: " << box.getArea() << endl;
 
     return 0;
+}
+
+double get_double() {
+    double user_input;
+    cin >> user_input;
+    while (cin.fail() || user_input <= 0) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Please enter a double greater than 0: ";
+        cin >> user_input;
+    }
+    return user_input;
 }
 
 
