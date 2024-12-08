@@ -164,6 +164,38 @@ class Window {
     void add_char_str_at(const std::string& string, int y, int x, int number_characters = -1);
 
     /**
+     * @brief Writes the characters of a string to the window. Similar to
+     * to calling add_char for each char in the string.
+     *
+     * If number_characters = -1, the whole string will be written to the window
+     * otherwise, up to number_characters characters of the string will be
+     * written.
+     * Processes control characters.
+     *
+     * @param string String to write to the screen
+     * @param number_characters The number of characters to print
+     * @throws std::runtime_error if the string argument is a nullptr
+     */
+    void add_str(const std::string& string, int number_characters = -1);
+
+    /**
+     * @brief Moves the cursor, then writes the characters of a string to the
+     * window. Similar to to calling move then add_char for each char in the
+     * string.
+     *
+     * If number_characters = -1, the whole string will be written to the window
+     * otherwise, up to number_characters characters of the string will be
+     * written.
+     * Processes control characters.
+     *
+     * @param string String to write to the screen
+     * @param number_characters The number of characters to print
+     * @throws std::runtime_error if the string argument is a nullptr
+     * @throws std::invalid_argument if the y/x position is out of window bounds
+     */
+    void add_str_at(const std::string& string, int y, int x, int number_characters = -1);
+
+    /**
      * @brief Returns a reference to the created derived window.
      *
      * This method ensures derived windows are properly created and managed by

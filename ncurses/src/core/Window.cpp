@@ -114,7 +114,7 @@ void Window::echo_char(chtype character) {
     }
 }
 
-void Window::add_char_str(std::string string, int number_characters) {
+void Window::add_char_str(const std::string& string, int number_characters) {
     std::vector<chtype> chtype_string = string_to_chtype(string);
     auto val = waddchnstr(this->get_pointer(), chtype_string.data(), number_characters);
     if (val == ERR) {
@@ -122,9 +122,23 @@ void Window::add_char_str(std::string string, int number_characters) {
     }
 }
 
-void Window::add_char_str_at(std::string string, int y, int x, int number_characters) {
+void Window::add_char_str_at(const std::string& string, int y, int x, int number_characters) {
     std::vector<chtype> chtype_string = string_to_chtype(string);
     auto val = mvwaddchnstr(this->get_pointer(), y, x, chtype_string.data(), number_characters);
+    if (val == ERR) {
+        throw std::runtime_error("String is nullptr");
+    }
+}
+
+void Window::add_str(const std::string& string, int number_characters) {
+    auto val = waddnstr(this->get_pointer(), string.c_str(), number_characters);
+    if (val == ERR) {
+        throw std::runtime_error("String is nullptr");
+    }
+}
+
+void Window::add_str_at(const std::string& string, int y, int x, int number_characters) {
+    auto val = mvwaddnstr(this->get_pointer(), y, x, string.c_str(), number_characters);
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
     }
