@@ -103,6 +103,7 @@ void Window::move_cursor(int y, int x) {
         throw std::invalid_argument("Cursor position out of bounds");
     }
     wmove(window.get(), y, x);
+    update_cursor_position();
 }
 
 void Window::refresh() {
@@ -114,6 +115,7 @@ void Window::add_char(chtype character) {
     if (val == ERR) {
         throw std::runtime_error("Not possible to add complete character to window.");
     }
+    update_cursor_position();
 }
 
 void Window::add_char_at(chtype character, int y, int x) {
@@ -128,6 +130,7 @@ void Window::add_char_at(chtype character, int y, int x) {
     if (val == ERR) {
         throw std::runtime_error("Not possible to add complete character to window.");
     }
+    update_cursor_position();
 }
 
 void Window::echo_char(chtype character) {
@@ -135,6 +138,7 @@ void Window::echo_char(chtype character) {
     if (val == ERR) {
         throw std::runtime_error("Not possible to add complete character to window.");
     }
+    update_cursor_position();
 }
 
 void Window::add_char_str(const std::string& string, int number_characters) {
@@ -161,6 +165,7 @@ void Window::add_str(const std::string& string, int number_characters) {
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
     }
+    update_cursor_position();
 }
 
 void Window::add_str_at(const std::string& string, int y, int x,
@@ -170,6 +175,7 @@ void Window::add_str_at(const std::string& string, int y, int x,
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
     }
+    update_cursor_position();
 }
 
 Window& Window::create_derived_window(int height, int width, int relative_y,
