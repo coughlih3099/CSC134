@@ -13,11 +13,11 @@
 #include "../../include/core/Window.hpp"
 #include "../../include/utils/util.hpp"
 
-Window::Window() :
+Window::Window(int height, int width) :
     delay(BLOCKING_INPUT),
     parent(nullptr),
-    height(0),
-    width(0),
+    height(height),
+    width(width),
     relative_y(0),
     relative_x(0) {
     window = std::unique_ptr<WINDOW, WindowDeleter>(

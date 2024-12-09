@@ -48,7 +48,7 @@ class Window {
 
  public:
     // Constructor for root windows
-    Window();  // Empty constructor defaults to a new window the size of the terminal
+    Window(int height, int width);  // Empty constructor defaults to a new window the size of the terminal
     Window(int height, int width, int start_y, int start_x);
 
     /**
