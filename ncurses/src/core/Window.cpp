@@ -13,6 +13,19 @@
 #include "../../include/core/Window.hpp"
 #include "../../include/utils/util.hpp"
 
+Window::Window() :
+    delay(BLOCKING_INPUT),
+    parent(nullptr),
+    height(0),
+    width(0),
+    relative_y(0),
+    relative_x(0) {
+    window = std::unique_ptr<WINDOW, WindowDeleter>(
+            newwin(height, width, relative_y, relative_x));
+    if (!window) {
+        throw std::runtime_error("Failed to create Window");
+    }
+}
 
 Window::Window(int height, int width, int start_y, int start_x) :
     delay(BLOCKING_INPUT),
@@ -99,7 +112,7 @@ void Window::add_char_at(chtype character, int y, int x) {
         error_message += y;
         error_message += ", ";
         error_message += x;
-        throw std::invalid_argument(error_message);
+        throw std::invalid_argument(std::move(error_message));
     }
     auto val = mvwaddch(this->get_pointer(), y, x, character);
     if (val == ERR) {
