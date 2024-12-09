@@ -9,7 +9,6 @@
 #include <string>
 #include <forward_list>
 #include <memory>
-#include <vector>
 
 #define BLOCKING_INPUT -1
 #define NONBLOCKING_INPUT 0
@@ -52,7 +51,7 @@ class Window {
 
  public:
     // Constructor for root windows
-    Window(int height, int width);  // Empty constructor defaults to a new window the size of the terminal
+    Window(int height, int width);
     Window(int height, int width, int start_y, int start_x);
 
     int get_delay() const { return delay; }
