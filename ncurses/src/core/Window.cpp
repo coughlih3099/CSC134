@@ -158,6 +158,7 @@ void Window::add_char_str_at(const std::string& string, int y, int x,
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
     }
+    update_cursor_position();
 }
 
 void Window::add_str(const std::string& string, int number_characters) {
