@@ -102,15 +102,15 @@ void Window::move_cursor(int y, int x) {
     if (y < 0 || y > this->height || x < 0 || x > this->width) {
         throw std::invalid_argument("Cursor position out of bounds");
     }
-    wmove(this->get_pointer(), y, x);
+    wmove(window.get(), y, x);
 }
 
 void Window::refresh() {
-    wrefresh(this->get_pointer());
+    wrefresh(window.get());
 }
 
 void Window::add_char(chtype character) {
-    auto val = waddch(this->get_pointer(), character);
+    auto val = waddch(window.get(), character);
     if (val == ERR) {
         throw std::runtime_error("Not possible to add complete character to window.");
     }
@@ -124,14 +124,14 @@ void Window::add_char_at(chtype character, int y, int x) {
         error_message += x;
         throw std::invalid_argument(std::move(error_message));
     }
-    auto val = mvwaddch(this->get_pointer(), y, x, character);
+    auto val = mvwaddch(window.get(), y, x, character);
     if (val == ERR) {
         throw std::runtime_error("Not possible to add complete character to window.");
     }
 }
 
 void Window::echo_char(chtype character) {
-    auto val = wechochar(this->get_pointer(), character);
+    auto val = wechochar(window.get(), character);
     if (val == ERR) {
         throw std::runtime_error("Not possible to add complete character to window.");
     }
@@ -139,7 +139,7 @@ void Window::echo_char(chtype character) {
 
 void Window::add_char_str(const std::string& string, int number_characters) {
     std::vector<chtype> chtype_string = string_to_chtype(string);
-    auto val = waddchnstr(this->get_pointer(), chtype_string.data(),
+    auto val = waddchnstr(window.get(), chtype_string.data(),
                           number_characters);
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
@@ -149,7 +149,7 @@ void Window::add_char_str(const std::string& string, int number_characters) {
 void Window::add_char_str_at(const std::string& string, int y, int x,
                              int number_characters) {
     std::vector<chtype> chtype_string = string_to_chtype(string);
-    auto val = mvwaddchnstr(this->get_pointer(), y, x, chtype_string.data(),
+    auto val = mvwaddchnstr(window.get(), y, x, chtype_string.data(),
                             number_characters);
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
@@ -157,7 +157,7 @@ void Window::add_char_str_at(const std::string& string, int y, int x,
 }
 
 void Window::add_str(const std::string& string, int number_characters) {
-    auto val = waddnstr(this->get_pointer(), string.c_str(), number_characters);
+    auto val = waddnstr(window.get(), string.c_str(), number_characters);
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
     }
@@ -165,7 +165,7 @@ void Window::add_str(const std::string& string, int number_characters) {
 
 void Window::add_str_at(const std::string& string, int y, int x,
                         int number_characters) {
-    auto val = mvwaddnstr(this->get_pointer(), y, x, string.c_str(),
+    auto val = mvwaddnstr(window.get(), y, x, string.c_str(),
                           number_characters);
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");

@@ -40,10 +40,13 @@ class Window {
     int delay;
     int height, width;
     int cursor_y, cursor_x;
+    int relative_y, relative_x;
     std::unique_ptr<WINDOW, WindowDeleter> window;
     Window* parent;
     std::forward_list<Window> subwindows;
-    int relative_y, relative_x;
+
+    void update_cursor_position();  // Implementation under the class
+
     // Constructor for derived windows
     Window(Window* parent, int height, int width, int start_y, int start_x);
 
@@ -51,6 +54,12 @@ class Window {
     // Constructor for root windows
     Window(int height, int width);  // Empty constructor defaults to a new window the size of the terminal
     Window(int height, int width, int start_y, int start_x);
+
+    int get_delay() const { return delay; }
+    int get_height() const { return height; }
+    int get_width() const { return width; }
+    int get_cursor_y() const { return cursor_y; }
+    int get_cursor_x() const { return cursor_x; }
 
     /**
      * @brief Sets (non)blocking read for the window.
@@ -63,9 +72,6 @@ class Window {
      * @param delay_in_milliseconds The delay to block for in milliseconds
      */
     void set_delay(int delay_in_milliseconds);
-    int get_delay() const { return delay; }
-    int get_height() const { return height; }
-    int get_width() const { return width; }
 
     /**
      * @brief Moves the cursor to the specified position.
@@ -231,3 +237,9 @@ class Window {
 };  // Window
 
 
+/**
+ * @brief Helper function for maintaining internal cursor position
+ */
+inline void Window::update_cursor_position() {
+    getyx(window.get(), cursor_y, cursor_x);
+}
