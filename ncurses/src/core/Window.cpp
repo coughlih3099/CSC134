@@ -18,6 +18,8 @@ Window::Window(int height, int width) :
     parent(nullptr),
     height(height),
     width(width),
+    cursor_y(0),
+    cursor_x(0),
     relative_y(0),
     relative_x(0) {
     window = std::unique_ptr<WINDOW, WindowDeleter>(
@@ -32,6 +34,8 @@ Window::Window(int height, int width, int start_y, int start_x) :
     parent(nullptr),
     height(height),
     width(width),
+    cursor_y(0),
+    cursor_x(0),
     relative_y(start_y),
     relative_x(start_x) {
     // According to NCurses man page, newwin will fail when any of arguments
@@ -75,6 +79,8 @@ Window::Window(Window* parent, int height, int width, int relative_y, int relati
     parent(parent),
     height(height),
     width(width),
+    cursor_x(0),
+    cursor_y(0),
     relative_y(relative_y),
     relative_x(relative_x) {
     if (!parent) {
@@ -97,6 +103,10 @@ void Window::move_cursor(int y, int x) {
         throw std::invalid_argument("Cursor position out of bounds");
     }
     wmove(this->get_pointer(), y, x);
+}
+
+void Window::refresh() {
+    wrefresh(this->get_pointer());
 }
 
 void Window::add_char(chtype character) {
@@ -129,15 +139,18 @@ void Window::echo_char(chtype character) {
 
 void Window::add_char_str(const std::string& string, int number_characters) {
     std::vector<chtype> chtype_string = string_to_chtype(string);
-    auto val = waddchnstr(this->get_pointer(), chtype_string.data(), number_characters);
+    auto val = waddchnstr(this->get_pointer(), chtype_string.data(),
+                          number_characters);
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
     }
 }
 
-void Window::add_char_str_at(const std::string& string, int y, int x, int number_characters) {
+void Window::add_char_str_at(const std::string& string, int y, int x,
+                             int number_characters) {
     std::vector<chtype> chtype_string = string_to_chtype(string);
-    auto val = mvwaddchnstr(this->get_pointer(), y, x, chtype_string.data(), number_characters);
+    auto val = mvwaddchnstr(this->get_pointer(), y, x, chtype_string.data(),
+                            number_characters);
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
     }
@@ -150,14 +163,17 @@ void Window::add_str(const std::string& string, int number_characters) {
     }
 }
 
-void Window::add_str_at(const std::string& string, int y, int x, int number_characters) {
-    auto val = mvwaddnstr(this->get_pointer(), y, x, string.c_str(), number_characters);
+void Window::add_str_at(const std::string& string, int y, int x,
+                        int number_characters) {
+    auto val = mvwaddnstr(this->get_pointer(), y, x, string.c_str(),
+                          number_characters);
     if (val == ERR) {
         throw std::runtime_error("String is nullptr");
     }
 }
 
-Window& Window::create_derived_window(int height, int width, int relative_y, int relative_x) {
+Window& Window::create_derived_window(int height, int width, int relative_y,
+                                      int relative_x) {
     Window derived_window(this, height, width, relative_y, relative_x);
     subwindows.push_front(std::move(derived_window));
     return subwindows.front();

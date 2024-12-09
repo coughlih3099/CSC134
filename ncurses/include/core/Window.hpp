@@ -39,6 +39,7 @@ class Window {
  private:
     int delay;
     int height, width;
+    int cursor_y, cursor_x;
     std::unique_ptr<WINDOW, WindowDeleter> window;
     Window* parent;
     std::forward_list<Window> subwindows;
@@ -77,6 +78,11 @@ class Window {
      * @throws std::invalid_argument if position is outside the bounds of the window.
      */
     void move_cursor(int y, int x);
+
+    /**
+     * @brief Refreshes the window
+     */
+    void refresh();
 
     /**
      * @brief Puts a character at the position of the cursor and then moves
