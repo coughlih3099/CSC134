@@ -4,6 +4,7 @@
  * @brief Implementation of Window wrapper for NCurses
  */
 #include <ncurses.h>
+#include <iterator>
 #include <forward_list>
 #include <memory>
 #include <stdexcept>
@@ -91,6 +92,10 @@ Window::Window(Window* parent, int height, int width, int relative_y, int relati
     if (!window) {
         throw std::runtime_error("Failed to create derived window");
     }
+}
+
+int Window::get_subwindow_count() {
+    return std::distance(subwindows.begin(), subwindows.end());
 }
 
 void Window::set_delay(int delay_in_milliseconds) {

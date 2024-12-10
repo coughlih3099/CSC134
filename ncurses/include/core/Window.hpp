@@ -61,6 +61,7 @@ class Window {
     int get_width() const { return width; }
     int get_cursor_y() const { return cursor_y; }
     int get_cursor_x() const { return cursor_x; }
+    int get_subwindow_count();
 
     /**
      * @brief Sets (non)blocking read for the window.
