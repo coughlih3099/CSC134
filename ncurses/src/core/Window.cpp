@@ -184,33 +184,11 @@ int Window::get_char() {
 }
 
 int Window::get_char_at(int y, int x) {
-    if (y < 0 || x < 0 || y > this->height || x > this->width) {
-        std::string error_message = "";
-        if (y < 0 || x < 0) {
-            if (y < 0) {
-                error_message += "Y";
-            }
-            if (!error_message.empty()) {
-                error_message += ", ";
-            }
-            if (x < 0) {
-                error_message += "X";
-            }
-            error_message += ": less than zero";
-        }
-        if (y > this->height || x > this->width) {
-            if (y > 0) {
-                error_message += "Y";
-            }
-            if (!error_message.empty()) {
-                error_message += ", ";
-            }
-            if (x > 0) {
-                error_message += "X";
-            }
-            error_message += ": beyond window bounds (" +
-                std::to_string(this->height) + ", " + std::to_string(this->width);
-        }
+    if (y < 0 || y > this->height || x < 0 || x > this->width) {
+        std::string error_message = "Cursor position out of window bounds; Position: ";
+        error_message += y;
+        error_message += ", ";
+        error_message += x;
         throw std::invalid_argument(std::move(error_message));
     }
     int ch = mvwgetch(window.get(), y, x);
