@@ -179,6 +179,44 @@ void Window::add_str_at(const std::string& string, int y, int x,
     update_cursor_position();
 }
 
+int Window::get_char() {
+    return wgetch(window.get());
+}
+
+int Window::get_char_at(int y, int x) {
+    if (y < 0 || x < 0 || y > this->height || x > this->width) {
+        std::string error_message = "";
+        if (y < 0 || x < 0) {
+            if (y < 0) {
+                error_message += "Y";
+            }
+            if (!error_message.empty()) {
+                error_message += ", ";
+            }
+            if (x < 0) {
+                error_message += "X";
+            }
+            error_message += ": less than zero";
+        }
+        if (y > this->height || x > this->width) {
+            if (y > 0) {
+                error_message += "Y";
+            }
+            if (!error_message.empty()) {
+                error_message += ", ";
+            }
+            if (x > 0) {
+                error_message += "X";
+            }
+            error_message += ": beyond window bounds (" +
+                std::to_string(this->height) + ", " + std::to_string(this->width);
+        }
+        throw std::invalid_argument(std::move(error_message));
+    }
+    int ch = mvwgetch(window.get(), y, x);
+    return ch;
+}
+
 Window& Window::create_derived_window(int height, int width, int relative_y,
                                       int relative_x) {
     Window derived_window(this, height, width, relative_y, relative_x);

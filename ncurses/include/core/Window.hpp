@@ -200,12 +200,52 @@ class Window {
      * written.
      * Processes control characters.
      *
-     * @param string String to write to the screen
-     * @param number_characters The number of characters to print
-     * @throws std::runtime_error if the string argument is a nullptr
-     * @throws std::invalid_argument if the y/x position is out of window bounds
+     * @param string String to write to the screen.
+     * @param number_characters The number of characters to print.
+     * @throws std::runtime_error if the string argument is a nullptr.
+     * @throws std::invalid_argument if the y/x position is out of window bounds.
      */
     void add_str_at(const std::string& string, int y, int x, int number_characters = -1);
+
+    /**
+     * @brief Gathers a key stroke from the terminal keyboard associated with
+     * the window.
+     *
+     * When input is pending, returns an integer identifying the keystroke;
+     * for alphanumeric and punctuation keys, this value corresponds to the
+     * character encoding used by the terminal.
+     * Use of the control key as a modifier often results in a distinct code.
+     * The behavior of other keys depends on whether the window has keypad
+     * enabled.
+     *
+     * @return int
+     * - Keycode for the associated keypress.
+     * - ERR: returns ERR if non-blocking input is set for the window or if
+     *   there is no input after the amount of time specified in the windows
+     *   delay.
+     */
+    int get_char();
+
+    /**
+     * @brief Moves the cursor, then gathers a key stroke from the terminal
+     * keyboard associated with the window.
+     *
+     * When input is pending, returns an integer identifying the keystroke;
+     * for alphanumeric and punctuation keys, this value corresponds to the
+     * character encoding used by the terminal.
+     * Use of the control key as a modifier often results in a distinct code.
+     * The behavior of other keys depends on whether the window has keypad
+     * enabled.
+     *
+     * @return int
+     * - Keycode for the associated keypress.
+     * - ERR: returns ERR if non-blocking input is set for the window or if
+     *   there is no input after the amount of time specified in the windows
+     *   delay
+     * @throws std::invalid_argument if the y/x position is out of window bounds.
+     */
+    int get_char_at(int y, int x);
+
 
     /**
      * @brief Returns a reference to the created derived window.
