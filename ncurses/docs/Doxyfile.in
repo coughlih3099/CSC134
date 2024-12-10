@@ -1,7 +1,7 @@
 # Project settings
-PROJECT_NAME            = "NCurses game"
+PROJECT_NAME            = @PROJECT_NAME@
 PROJECT_NUMBER          = @PROJECT_VERSION@
-PROJECT_BRIEF           = "NCurses game"
+PROJECT_BRIEF           = @PROJECT_BRIEF@
 
 # Input settings
 INPUT                   = @DOXYGEN_INPUT_DIR@/src \
