@@ -146,7 +146,7 @@ void Window::echo_char(chtype character) {
 }
 
 void Window::add_char_str(const std::string& string, int number_characters) {
-    std::vector<chtype> chtype_string = string_to_chtype(string);
+    std::vector<chtype> chtype_string = string_to_chtype(string, this);
     auto val = waddchnstr(window.get(), chtype_string.data(),
                           number_characters);
     if (val == ERR) {
@@ -163,7 +163,7 @@ void Window::add_char_str_at(const std::string& string, int y, int x,
         error_message += x;
         throw std::invalid_argument(std::move(error_message));
     }
-    std::vector<chtype> chtype_string = string_to_chtype(string);
+    std::vector<chtype> chtype_string = string_to_chtype(string, this);
     auto val = mvwaddchnstr(window.get(), y, x, chtype_string.data(),
                             number_characters);
     if (val == ERR) {
@@ -214,10 +214,19 @@ int Window::get_char_at(int y, int x) {
 }
 
 void Window::unget_char(char character) {
-    int unget = ungetch(character);
-    if (unget == ERR) {
+    auto val = ungetch(character);
+    if (val == ERR) {
         throw std::runtime_error("Input buffer is full");
     }
+}
+
+void Window::set_attributes(attr_t attributes, short colors) {
+    wattr_set(window.get(), attributes, colors, nullptr);
+}
+
+chtype Window::get_attributes() {
+    wattr_get(window.get(), &attributes, &color_pair, nullptr);
+    return static_cast<chtype>(attributes | COLOR_PAIR(color_pair));
 }
 
 Window& Window::create_derived_window(int height, int width, int relative_y,

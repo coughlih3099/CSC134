@@ -40,6 +40,8 @@ class Window {
     int height, width;
     int cursor_y, cursor_x;
     int relative_y, relative_x;
+    attr_t attributes;
+    short color_pair;
     std::unique_ptr<WINDOW, WindowDeleter> window;
     Window* parent;
     std::forward_list<Window> subwindows;
@@ -252,6 +254,18 @@ class Window {
      * @throws std::runtime_error if the input buffer is full
      */
     void unget_char(char character);
+
+    /**
+     * @brief Sets attributes and colors for a window
+     */
+    void set_attributes(attr_t attributes, short color);
+
+    /**
+     * @brief Gets the attributes and colors for a window
+     *
+     * @return chtype that has the attributes and colors
+     */
+    chtype get_attributes();
 
     /**
      * @brief Returns a reference to the created derived window.
