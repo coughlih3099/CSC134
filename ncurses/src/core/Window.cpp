@@ -100,7 +100,11 @@ void Window::set_delay(int delay_in_milliseconds) {
 
 void Window::move_cursor(int y, int x) {
     if (y < 0 || y > this->height || x < 0 || x > this->width) {
-        throw std::invalid_argument("Cursor position out of bounds");
+        std::string error_message = "Cursor position out of window bounds; Position: ";
+        error_message += y;
+        error_message += ", ";
+        error_message += x;
+        throw std::invalid_argument(std::move(error_message));
     }
     wmove(window.get(), y, x);
     update_cursor_position();
@@ -152,6 +156,13 @@ void Window::add_char_str(const std::string& string, int number_characters) {
 
 void Window::add_char_str_at(const std::string& string, int y, int x,
                              int number_characters) {
+    if (y < 0 || y > this->height || x < 0 || x > this->width) {
+        std::string error_message = "Cursor position out of window bounds; Position: ";
+        error_message += y;
+        error_message += ", ";
+        error_message += x;
+        throw std::invalid_argument(std::move(error_message));
+    }
     std::vector<chtype> chtype_string = string_to_chtype(string);
     auto val = mvwaddchnstr(window.get(), y, x, chtype_string.data(),
                             number_characters);
@@ -171,6 +182,13 @@ void Window::add_str(const std::string& string, int number_characters) {
 
 void Window::add_str_at(const std::string& string, int y, int x,
                         int number_characters) {
+    if (y < 0 || y > this->height || x < 0 || x > this->width) {
+        std::string error_message = "Cursor position out of window bounds; Position: ";
+        error_message += y;
+        error_message += ", ";
+        error_message += x;
+        throw std::invalid_argument(std::move(error_message));
+    }
     auto val = mvwaddnstr(window.get(), y, x, string.c_str(),
                           number_characters);
     if (val == ERR) {
