@@ -46,18 +46,12 @@ set(SOURCES
     src/main.cpp
     src/core/NCursesSession.cpp
     src/core/Window.cpp
-    src/game/Character.cpp
-    src/game/Map.cpp
-    src/game/MovementTypes.cpp
-    src/procgen/cellularautomaton.cpp
 )
 
 # Add include directories
 include_directories(
     ${PROJECT_SOURCE_DIR}/include/core
-    ${PROJECT_SOURCE_DIR}/include/game
     ${PROJECT_SOURCE_DIR}/include/utils
-    ${PROJECT_SOURCE_DIR}/include/procgen
     ${CURSES_INCLUDE_DIRS}
 )
 
