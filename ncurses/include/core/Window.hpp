@@ -246,6 +246,12 @@ class Window {
      */
     int get_char_at(int y, int x);
 
+    /**
+     * @brief Returns character to the input queue for the next call to get_char.
+     *
+     * @throws std::runtime_error if the input buffer is full
+     */
+    void unget_char(char character);
 
     /**
      * @brief Returns a reference to the created derived window.

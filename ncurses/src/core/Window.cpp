@@ -213,6 +213,13 @@ int Window::get_char_at(int y, int x) {
     return ch;
 }
 
+void Window::unget_char(char character) {
+    int unget = ungetch(character);
+    if (unget == ERR) {
+        throw std::runtime_error("Input buffer is full");
+    }
+}
+
 Window& Window::create_derived_window(int height, int width, int relative_y,
                                       int relative_x) {
     Window derived_window(this, height, width, relative_y, relative_x);
