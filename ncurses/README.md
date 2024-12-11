@@ -1,5 +1,9 @@
 # NCurses wrapper
 
+## If in codespace
+- `sudo apt-get update && sudo apt-get upgrade -y`
+- `sudo apt-get install doxygen -y`
+
 ## How to build
 - Clone the repo
 - Move into the ncurses directory
