@@ -12,6 +12,7 @@
 
 ### View docs
 open the index.html in your browser, it's located in build/docs/html/
+If you create the docs in a codespace you can download them to your pc to actually view them
 
 # How to use
 This project is just a wrapper around ncurses that does some of the memory
